@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**
@@ -27,5 +28,10 @@ public class ZNSGGGScheduler implements BaseSchduler {
             spider.addUrl(startUrl);
         }
         spider.runAsync();
+    }
+
+    @PostConstruct
+    public void start(){
+        run();
     }
 }
