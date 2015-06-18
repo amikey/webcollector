@@ -13,7 +13,7 @@
     <context:component-scan base-package="com.raozk" />
 
     <bean id="jedisConnFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-          p:host-name="120.55.74.162" p:password="redis123456"/>
+          p:host-name="120.55.74.162" p:password="redis123456" p:database="1"/>
 
     <!-- redis template definition -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
