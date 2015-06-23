@@ -25,7 +25,7 @@ public class RedisGGPipeline implements Pipeline {
     RedisTemplate<String, String> redisTemplate;
 
     boolean addCrawed(String url){
-        return redisTemplate.opsForSet().add("crawed",url)==1?true:false;
+        return redisTemplate.opsForSet().add("001:00",url)==1?true:false;
     }
 
     public void process(ResultItems resultItems, Task task) {
@@ -33,7 +33,7 @@ public class RedisGGPipeline implements Pipeline {
         String title = resultItems.get("title");
         String content = resultItems.get("content");*/
         if(resultItems.getAll()!=null && resultItems.getAll().size()>0){
-            redisTemplate.opsForList().leftPush("gg", JSON.toJSONString(resultItems.getAll()));
+            redisTemplate.opsForList().leftPush("001:01", JSON.toJSONString(resultItems.getAll()));
             addCrawed(resultItems.getRequest().getUrl());
         }
     }

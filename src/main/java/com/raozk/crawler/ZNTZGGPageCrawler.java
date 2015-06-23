@@ -12,7 +12,7 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class ZNSGGGPageCrawler extends AbstractBaseCrawler{
+public class ZNTZGGPageCrawler extends AbstractBaseCrawler{
 
     private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
@@ -21,11 +21,11 @@ public class ZNSGGGPageCrawler extends AbstractBaseCrawler{
     private static String band = "中南邮票交易所";
 
     static {
-        startUrls.add("http://www.znypjy.com/a/xinxipilu/shengougonggao/");
+        startUrls.add("http://www.znypjy.com/a/xinxipilu/tongzhigonggao/list_7_1.html");
     }
 
     public void process(Page page) {
-        List<String> links = page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xinxipilu/shengougonggao/\\d+/\\d+/\\d+.html").all();
+        List<String> links = page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xinxipilu/tongzhigonggao/\\d+/\\d+/\\d+.html").all();
         for(String link : links) {
             if (!crawed(link)) {
                 page.addTargetRequests(links);
