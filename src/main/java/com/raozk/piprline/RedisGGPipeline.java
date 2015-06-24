@@ -11,6 +11,7 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,9 +33,15 @@ public class RedisGGPipeline implements Pipeline {
         /*String url = resultItems.getRequest().getUrl();
         String title = resultItems.get("title");
         String content = resultItems.get("content");*/
-        if(resultItems.getAll()!=null && resultItems.getAll().size()>0){
+        if(resultItems.getAll()!=null && resultItems.getAll().size()>0 && addCrawed(resultItems.getRequest().getUrl())){
             redisTemplate.opsForList().leftPush("001:01", JSON.toJSONString(resultItems.getAll()));
-            addCrawed(resultItems.getRequest().getUrl());
         }
+    }
+
+    public static void main(String[] args){
+        Map<String, String> a = new HashMap<String, String>();
+        a.put("a", "中文");
+        String json = JSON.toJSONString(a);
+        System.out.println(JSON.toJSONString(a));
     }
 }

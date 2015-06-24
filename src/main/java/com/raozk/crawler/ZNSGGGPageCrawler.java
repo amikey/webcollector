@@ -19,6 +19,7 @@ public class ZNSGGGPageCrawler extends AbstractBaseCrawler{
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "中南邮票交易所";
+    private static String type = "申购公告";
 
     static {
         startUrls.add("http://www.znypjy.com/a/xinxipilu/shengougonggao/");
@@ -26,11 +27,13 @@ public class ZNSGGGPageCrawler extends AbstractBaseCrawler{
 
     public void process(Page page) {
         List<String> links = page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xinxipilu/shengougonggao/\\d+/\\d+/\\d+.html").all();
+        LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
             if (!crawed(link)) {
-                page.addTargetRequests(links);
+                temp.addFirst(link);
             }
         }
+        page.addTargetRequests(temp);
         String title = page.getHtml().xpath("//p[@class='article_title']/text()").get();
         String context = page.getHtml().xpath("//div[@class='article_content']/html()").get();
         String time = page.getHtml().xpath("//p[@class='article_note']/text()").get();
@@ -42,6 +45,7 @@ public class ZNSGGGPageCrawler extends AbstractBaseCrawler{
             page.putField("context", context);
             page.putField("time", time);
             page.putField("band", band);
+            page.putField("type", type);
         }
     }
 
