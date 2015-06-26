@@ -14,24 +14,23 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class ZNTZGGPageCrawler extends AbstractBaseCrawler{
+public class ZNTGGGPageCrawler extends AbstractBaseCrawler{
 
-    private static Logger logger = LoggerFactory.getLogger(ZNTZGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(ZNTGGGPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "中南邮票交易所";
-    private static String type = "通知公告";
-
+    private static String type = "托管公告";
 
     static {
-        startUrls.add("http://www.znypjy.com/a/xinxipilu/tongzhigonggao/list_7_1.html");
+        startUrls.add("http://www.znypjy.com/a/xinxipilu/tuoguangonggao/");
     }
 
     public void process(Page page) {
-        List<String> links = page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xinxipilu/tongzhigonggao/\\d+/\\d+/\\d+.html").all();
+        List<String> links = page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xinxipilu/tuoguangonggao/\\d+/\\d+/\\d+.html").all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
             if (!crawed(link)) {

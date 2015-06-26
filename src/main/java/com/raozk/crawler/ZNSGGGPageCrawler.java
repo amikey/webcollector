@@ -1,5 +1,7 @@
 package com.raozk.crawler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.Page;
@@ -13,6 +15,8 @@ import java.util.List;
  */
 @Component
 public class ZNSGGGPageCrawler extends AbstractBaseCrawler{
+
+    private static Logger logger = LoggerFactory.getLogger(ZNSGGGPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
@@ -46,6 +50,7 @@ public class ZNSGGGPageCrawler extends AbstractBaseCrawler{
             page.putField("time", time);
             page.putField("band", band);
             page.putField("type", type);
+            logger.info("crawed:"+title);
         }
     }
 

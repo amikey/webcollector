@@ -14,7 +14,7 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class ZNTZGGPageCrawler extends AbstractBaseCrawler{
+public class ZNZXPageCrawler extends AbstractBaseCrawler{
 
     private static Logger logger = LoggerFactory.getLogger(ZNTZGGPageCrawler.class);
 
@@ -23,15 +23,20 @@ public class ZNTZGGPageCrawler extends AbstractBaseCrawler{
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "中南邮票交易所";
-    private static String type = "通知公告";
-
+    private static String type = "咨询";
 
     static {
-        startUrls.add("http://www.znypjy.com/a/xinxipilu/tongzhigonggao/list_7_1.html");
+        startUrls.add("http://www.znypjy.com/a/xingyezixun/xingyexinwen/");
+        startUrls.add("http://www.znypjy.com/a/xingyezixun/shichangbaojia/");
+        startUrls.add("http://www.znypjy.com/a/xingyezixun/zhongjinyanjiu/");
+        startUrls.add("http://www.znypjy.com/a/xingyezixun/mingjiazhuanlan/");
+        startUrls.add("http://www.znypjy.com/a/xingyezixun/fenghuangzongshu/");
+        startUrls.add("http://www.znypjy.com/a/xingyezixun/quancangzongshu/");
+        startUrls.add("http://www.znypjy.com/a/xingyezixun/dinghanzongshu/");
     }
 
     public void process(Page page) {
-        List<String> links = page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xinxipilu/tongzhigonggao/\\d+/\\d+/\\d+.html").all();
+        List<String> links = page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xingyezixun/.*/\\d+/\\d+/\\d+.html").all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
             if (!crawed(link)) {
