@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class ZNZXPageCrawler extends AbstractBaseCrawler{
 
-    private static Logger logger = LoggerFactory.getLogger(ZNTZGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(ZNZXPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
