@@ -39,7 +39,7 @@ public class XX007PageCrawler extends AbstractBaseCrawler{
             page.addTargetRequests(links);
         }else{
             links = page.getHtml().links().regex("http://www\\.xx007\\.cn/index\\.asp\\?boardid=\\d+").all();
-            page.addTargetRequests(links.subList(0 ,1));
+            page.addTargetRequests(links);
         }
     }
 
