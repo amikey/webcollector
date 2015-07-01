@@ -44,7 +44,11 @@ public class RedisMobilePipeline implements Pipeline {
         }
 
         String truename = text.substring(text.indexOf("姓名")+3).trim();
-        truename = truename.substring(0, truename.indexOf("（"));
+        int i = truename.indexOf("（");
+        if (i<0 || i>5){
+            i=2;
+        }
+        truename = truename.substring(0, 2);
 
         map.put("truename", truename);
         map.put("content", text);
