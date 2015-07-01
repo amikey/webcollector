@@ -38,16 +38,19 @@ public class JMJTZGGPageCrawler extends AbstractBaseCrawler{
             }
         }
         page.addTargetRequests(temp);
-        String title = page.getHtml().xpath("//p[@class='article_title']/text()").get();
-        String context = page.getHtml().xpath("//div[@class='article_content']/html()").get();
-        String time = page.getHtml().xpath("//p[@class='article_note']/text()").get();
-        if(StringUtils.hasText(time)){
-            time = time.substring(0,16);
-        }
+        String title = page.getHtml().xpath("//h2[@class='title']/text()").get();
+        String context = page.getHtml().xpath("//td[@class='content']/html()").get();
         if(StringUtils.hasText(title)&&StringUtils.hasText(context)) {
+            String[] ts = page.getHtml().get().split("var tm='");
+            if(ts.length>1){
+                String time = ts[1];
+                time = time.substring(0, time.indexOf("'"));
+                if(StringUtils.hasText(time)){
+                    page.putField("time", time);
+                }
+            }
             page.putField("title", title);
             page.putField("context", context);
-            page.putField("time", time);
             page.putField("band", band);
             page.putField("type", type);
             logger.info("crawed:"+title);

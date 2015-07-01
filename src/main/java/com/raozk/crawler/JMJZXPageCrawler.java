@@ -14,23 +14,23 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class JMJSGGGPageCrawler extends AbstractBaseCrawler{
+public class JMJZXPageCrawler extends AbstractBaseCrawler{
 
-    private static Logger logger = LoggerFactory.getLogger(JMJSGGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(JMJZXPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "金马甲";
-    private static String type = "申购公告";
+    private static String type = "咨询";
 
     static {
-        startUrls.add("http://qbyp.jinmajia.com/article/mtbd/qbyp/gggs/sggp/");
+        startUrls.add("http://qbyp.jinmajia.com/article/mtbd/qbyp/bszx/");
     }
 
     public void process(Page page) {
-        List<String> links = page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/sggp/\\d+/\\d+.shtml").all();
+        List<String> links = page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/bszx/\\d+/\\d+.shtml").all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
             if (!crawed(link)) {
