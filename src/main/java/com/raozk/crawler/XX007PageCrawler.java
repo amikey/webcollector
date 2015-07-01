@@ -30,7 +30,8 @@ public class XX007PageCrawler extends AbstractBaseCrawler{
 
     public void process(Page page) {
         String url = page.getRequest().getUrl();
-        List<String> links = null;
+        page.addTargetRequests(page.getHtml().links().regex("http://www\\.xx007\\.cn/.*dispbbs.*").all());
+        page.addTargetRequests(page.getHtml().links().regex("http://www\\.xx007\\.cn/index\\.asp\\?boardid=\\d+").all());
         if(url.indexOf("dispbbs")>0){
             List<Selectable> contents = page.getHtml().xpath("div[@class='post']").nodes();
             for(Selectable div : contents){
@@ -38,12 +39,6 @@ public class XX007PageCrawler extends AbstractBaseCrawler{
                 Selectable tail = divs.get(divs.size()-1);
                 page.putField("content", tail.get());
             }
-        }else if(url.indexOf("index")>0){
-            links = page.getHtml().links().regex("http://www\\.xx007\\.cn/.*dispbbs.*").all();
-            page.addTargetRequests(links);
-        }else{
-            links = page.getHtml().links().regex("http://www\\.xx007\\.cn/index\\.asp\\?boardid=\\d+").all();
-            page.addTargetRequests(links);
         }
     }
 
