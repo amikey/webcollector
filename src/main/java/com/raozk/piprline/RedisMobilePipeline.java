@@ -13,6 +13,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -30,36 +31,43 @@ public class RedisMobilePipeline implements Pipeline {
     RedisTemplate<String, String> redisTemplate;
 
     public void process(ResultItems resultItems, Task task) {
-        List<String> contents = resultItems.get("content");
-        if(contents != null && contents.size()>0){
-            for(String content : contents){
-                if(StringUtils.hasText(content)){
-                    if(content.indexOf("手机")>0){
-                        String[] ss = content.split("手机");
-                        if(ss.length>1){
-                            String mobile = ss[1];
-                            mobile = mobile.trim();
-                            if(mobile.startsWith(":") || mobile.startsWith("：")){
-                                mobile = mobile.substring(1).trim().substring(0 ,11);
-                            }else{
-                                mobile = mobile.substring(0, 11);
-                            }
-                            if(isMobileNO(mobile)){
-                                Map<String, String> map = new HashMap<String, String>();
-                                map.put("value", content);
-                                redisTemplate.opsForValue().set("013:"+mobile, JSON.toJSONString(map));
-                            }
-                        }
-                    }
-                }
-            }
+        Map<String, String> map = new HashMap<String, String>();
+        String text = resultItems.get("content");
+        if(StringUtils.isEmpty(text)){
+            return;
+        }
+
+        List<String> mobiles = getMobileNo(text);
+
+        if(mobiles.size()==0){
+            return;
+        }
+
+        String truename = text.substring(text.indexOf("姓名")+3).trim();
+        truename = truename.substring(0, truename.indexOf("（"));
+
+        map.put("truename", truename);
+        map.put("content", text);
+
+        for(String mobile : mobiles){
+            redisTemplate.opsForValue().set("013:"+mobile, JSON.toJSONString(map));
         }
     }
 
-    public static boolean isMobileNO(String mobiles){
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-        Matcher m = p.matcher(mobiles);
+    public static boolean isMobileNO(String text){
+        Pattern p = Pattern.compile("((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}");
+        Matcher m = p.matcher(text);
         return m.matches();
+    }
+
+    public static List<String> getMobileNo(String text){
+        Pattern p = Pattern.compile("((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}");
+        Matcher m = p.matcher(text);
+        List<String> mobiles = new LinkedList<String>();
+        while(m.find()){
+            mobiles.add(m.group());
+        }
+        return mobiles;
     }
 
 }

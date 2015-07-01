@@ -28,7 +28,7 @@ public class XX007Scheduler implements BaseSchduler {
     @Resource(type = RedisMobilePipeline.class)
     Pipeline pipeline;
 
-    @Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 0 17 * * ?")
     public void run() {
         Spider spider = Spider.create(baseCrawler).addPipeline(pipeline);
         for(String startUrl : baseCrawler.getStartUrls()){

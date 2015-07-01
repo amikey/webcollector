@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.selector.Selectable;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,14 +28,17 @@ public class XX007PageCrawler extends AbstractBaseCrawler{
         startUrls.add("http://www.xx007.cn/");
     }
 
-    public void process(Page page) {//http://xx007.cn/index.asp?boardid=16
+    public void process(Page page) {
         String url = page.getRequest().getUrl();
         List<String> links = null;
         if(url.indexOf("dispbbs")>0){
-            List<String> contents = page.getHtml().xpath("div[@class='post']/").all();
-            page.putField("content", contents);
-        }
-        if(url.indexOf("index")>0){
+            List<Selectable> contents = page.getHtml().xpath("div[@class='post']").nodes();
+            for(Selectable div : contents){
+                List<Selectable> divs = div.xpath("div/text()").nodes();
+                Selectable tail = divs.get(divs.size()-1);
+                page.putField("content", tail.get());
+            }
+        }else if(url.indexOf("index")>0){
             links = page.getHtml().links().regex("http://www\\.xx007\\.cn/.*dispbbs.*").all();
             page.addTargetRequests(links);
         }else{
