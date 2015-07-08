@@ -31,7 +31,6 @@ public class XianjiaPageCrawler extends AbstractBaseCrawler{
     public void process(Page page) {
         String html = page.getHtml().xpath("//div[@class='editor']").get();
 
-
         String[] contents = html.split("\n");
         for(String s : contents){
             int index = s.indexOf("元成交");
@@ -49,7 +48,7 @@ public class XianjiaPageCrawler extends AbstractBaseCrawler{
                         i = 0;
                     }
                 }
-                System.out.println(String.format("%s , %f", name, price));
+                //System.out.println(String.format("%s , %f", name, price));
             }
 
         }

@@ -1,9 +1,8 @@
-package com.raozk.scheduler;
+package com.raozk.zhongnan;
 
 import com.raozk.crawler.BaseCrawler;
-import com.raozk.crawler.ZNSGGGPageCrawler;
-import com.raozk.crawler.ZNTGGGPageCrawler;
-import com.raozk.piprline.RedisGGPipeline;
+import com.raozk.scheduler.BaseSchduler;
+import com.raozk.piprline.AnnouncementPipeline;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -24,7 +23,7 @@ public class ZNTGGGScheduler implements BaseSchduler {
     @Resource(type = ZNTGGGPageCrawler.class)
     BaseCrawler baseCrawler;
 
-    @Resource(type = RedisGGPipeline.class)
+    @Resource(type = AnnouncementPipeline.class)
     Pipeline pipeline;
 
     @Scheduled(cron = "0 * * * * ?")

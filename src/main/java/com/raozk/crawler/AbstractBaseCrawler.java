@@ -17,7 +17,7 @@ public abstract class AbstractBaseCrawler implements BaseCrawler{
     @Resource
     RedisTemplate<String, String> redisTemplate;
 
-    boolean crawed(String url){
+    public boolean crawed(String url){
         return redisTemplate.opsForSet().isMember("001:00",url);
     }
 

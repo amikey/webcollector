@@ -1,9 +1,9 @@
-package com.raozk.scheduler;
+package com.raozk.xx007;
 
 import com.raozk.crawler.BaseCrawler;
-import com.raozk.crawler.JMJTGGGPageCrawler;
-import com.raozk.crawler.JMJTZGGPageCrawler;
-import com.raozk.piprline.RedisGGPipeline;
+import com.raozk.crawler.XX007PageCrawler;
+import com.raozk.piprline.RedisMobilePipeline;
+import com.raozk.scheduler.BaseSchduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,19 +17,19 @@ import javax.annotation.Resource;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class JMJTZGGScheduler implements BaseSchduler {
+public class XX007Scheduler implements BaseSchduler {
 
-    private static Logger logger = LoggerFactory.getLogger(JMJTZGGScheduler.class);
+    private static Logger logger = LoggerFactory.getLogger(XX007Scheduler.class);
 
-    @Resource(type = JMJTZGGPageCrawler.class)
+    @Resource(type = XX007PageCrawler.class)
     BaseCrawler baseCrawler;
 
-    @Resource(type = RedisGGPipeline.class)
+    @Resource(type = RedisMobilePipeline.class)
     Pipeline pipeline;
 
-    @Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 0 17 * * ?")
     public void run() {
-        Spider spider = Spider.create(baseCrawler).addPipeline(pipeline);
+        Spider spider = Spider.create(baseCrawler).addPipeline(pipeline).thread(50);
         for(String startUrl : baseCrawler.getStartUrls()){
             spider.addUrl(startUrl);
         }

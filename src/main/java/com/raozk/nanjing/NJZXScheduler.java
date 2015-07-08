@@ -1,9 +1,9 @@
-package com.raozk.scheduler;
+package com.raozk.nanjing;
 
 import com.raozk.crawler.BaseCrawler;
-import com.raozk.crawler.JMJSGGGPageCrawler;
-import com.raozk.crawler.JMJZXPageCrawler;
-import com.raozk.piprline.RedisGGPipeline;
+import com.raozk.piprline.AdvisoryNewsPipeline;
+import com.raozk.scheduler.BaseSchduler;
+import com.raozk.zhongnan.ZNZXPageCrawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,14 +17,14 @@ import javax.annotation.Resource;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class JMJZXScheduler implements BaseSchduler {
+public class NJZXScheduler implements BaseSchduler {
 
-    private static Logger logger = LoggerFactory.getLogger(JMJZXScheduler.class);
+    private static Logger logger = LoggerFactory.getLogger(NJZXScheduler.class);
 
-    @Resource(type = JMJZXPageCrawler.class)
+    @Resource(type = NJZXPageCrawler.class)
     BaseCrawler baseCrawler;
 
-    @Resource(type = RedisGGPipeline.class)
+    @Resource(type = AdvisoryNewsPipeline.class)
     Pipeline pipeline;
 
     @Scheduled(cron = "0 * * * * ?")
