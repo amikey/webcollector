@@ -9,6 +9,8 @@ import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,7 +50,11 @@ public class ZNSGGGPageCrawler extends AbstractBaseCrawler {
             time = time.substring(0,16);
         }
         if(StringUtils.hasText(title)&&StringUtils.hasText(content)) {
-            page.putField("announcement", new Announcement(title, content, band, type, time));
+            try {
+                page.putField("announcement", new Announcement(title, content, band, type, new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(time)));
+            } catch (ParseException e) {
+                logger.error("get time error", e);
+            }
             logger.info("crawed:"+title);
         }
     }

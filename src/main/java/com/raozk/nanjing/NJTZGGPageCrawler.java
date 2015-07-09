@@ -9,6 +9,9 @@ import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,10 +49,23 @@ public class NJTZGGPageCrawler extends AbstractBaseCrawler {
         String content = page.getHtml().xpath("//div[@class='neirong_text']/html()").get();
         String time = page.getHtml().xpath("//div[@class='neirong_note']/text()").get();
         if(StringUtils.hasText(time)){
-            time = time.substring(0,17);
+            time = time.trim();
         }
         if(StringUtils.hasText(title)&&StringUtils.hasText(content)) {
-            page.putField("announcement", new Announcement(title, content, band, type, time));
+            //2015/7/8 21:55:53
+            //page.putField("announcement", new Announcement(title, content, band, type, time));
+            Date timeDate = null;
+            try {
+                timeDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(time);
+            } catch (ParseException e) {
+                logger.error("parse time error", e);
+                try {
+                    timeDate = new SimpleDateFormat("yyyy/MM/dd").parse(time);
+                } catch (ParseException e1) {
+                    timeDate = new Date();
+                }
+            }
+            page.putField("announcement", new Announcement(title, content, band, type, timeDate));
             logger.info("crawed:"+title);
         }
     }

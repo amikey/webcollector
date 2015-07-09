@@ -26,7 +26,7 @@ public class JMJZXScheduler implements BaseSchduler {
     @Resource(type = AnnouncementPipeline.class)
     Pipeline pipeline;
 
-    @Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 15 14 * * ?")
     public void run() {
         Spider spider = Spider.create(baseCrawler).addPipeline(pipeline);
         for(String startUrl : baseCrawler.getStartUrls()){

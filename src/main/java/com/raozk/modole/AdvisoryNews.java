@@ -12,12 +12,12 @@ public class AdvisoryNews {
     private String content;
     private String band;
     private String type;
-    private String time;
+    private Date time;
     private Date st = new Date();
 
     public AdvisoryNews(){}
 
-    public AdvisoryNews(String title, String content, String band, String type, String time){
+    public AdvisoryNews(String title, String content, String band, String type, Date time){
         this.title = title;
         this.content = content;
         this.band = band;
@@ -65,11 +65,11 @@ public class AdvisoryNews {
         this.type = type;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 

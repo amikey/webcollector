@@ -2,6 +2,7 @@ package com.raozk.zhongnan;
 
 import com.raozk.crawler.AbstractBaseCrawler;
 import com.raozk.modole.AdvisoryNews;
+import com.raozk.modole.Announcement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,8 @@ import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,7 +57,11 @@ public class ZNZXPageCrawler extends AbstractBaseCrawler {
             time = time.substring(0,16);
         }
         if(StringUtils.hasText(title)&&StringUtils.hasText(content)) {
-            page.putField("advisoryNews", new AdvisoryNews(title, content, band, type, time));
+            try {
+                page.putField("advisoryNews", new AdvisoryNews(title, content, band, type, new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(time)));
+            } catch (ParseException e) {
+                logger.error("get time error", e);
+            }
             logger.info("crawed:" + title);
         }
     }

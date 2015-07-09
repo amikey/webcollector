@@ -28,7 +28,7 @@ public class XianjiaScheduler implements BaseSchduler {
     @Resource(type = RedisXianjiaPipeline.class)
     Pipeline pipeline;
 
-    @Scheduled(cron = "0 * * * * ?")
+    //@Scheduled(cron = "0 * * * * ?")
     public void run() {
         Spider spider = Spider.create(baseCrawler).addPipeline(pipeline).thread(50);
         for(String startUrl : baseCrawler.getStartUrls()){
