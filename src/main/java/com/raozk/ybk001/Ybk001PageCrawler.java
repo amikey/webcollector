@@ -41,7 +41,7 @@ public class Ybk001PageCrawler extends AbstractBaseCrawler{
         List<Selectable> details = page.getHtml().xpath("table[@class='detail']").nodes();
         Map<String, Map<String, String>> mobileMap = new HashMap<String, Map<String, String>>();
         for(Selectable detail : details){
-            System.out.println(detail.get());
+            //System.out.println(detail.get());
             String det = detail.get();
             if(StringUtils.hasText(det)){
                 List<String> mobiles = getMobileNo(det);
