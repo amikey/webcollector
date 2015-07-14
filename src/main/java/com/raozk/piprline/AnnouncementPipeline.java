@@ -11,7 +11,13 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+
+import org.zeromq.ZMQ;
+import org.zeromq.ZMQ.Context;
+import org.zeromq.ZMQ.Socket;
 
 /**
  * Created by rzk on 15-6-16.
@@ -36,6 +42,7 @@ public class AnnouncementPipeline implements Pipeline {
         if(announcement!=null && addCrawed(resultItems.getRequest().getUrl())){
             saveAnnoucement2Redis(announcement);
             saveAnnoucement2Mysql(announcement);
+            pubAnnoucement(announcement);
         }
     }
 
@@ -46,5 +53,28 @@ public class AnnouncementPipeline implements Pipeline {
     private void saveAnnoucement2Mysql(Announcement announcement){
         jdbcTemplate.update("insert into t_announcement(title, content, time, band, type, st) values(?,?,?,?,?,?)",
                 announcement.getTitle(), announcement.getContent(), announcement.getTime(), announcement.getBand(), announcement.getType(), announcement.getSt());
+    }
+
+    private Context context = null;
+    private Socket publisher = null;
+
+    @PostConstruct
+    private void init(){
+        Context context = ZMQ.context(1);
+        Socket publisher = context.socket(ZMQ.PUB);
+        publisher.setLinger(5000);
+        publisher.setSndHWM(0);
+        publisher.bind("tcp://*:8888");
+    }
+
+    synchronized private void pubAnnoucement(Announcement announcement){
+        publisher.send(JSON.toJSONString(announcement), 0);
+    }
+
+    @PreDestroy
+    private void destroy(){
+        publisher.send("END", 0);
+        publisher.close();
+        context.term();
     }
 }
