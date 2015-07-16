@@ -51,8 +51,8 @@ public class AnnouncementPipeline implements Pipeline {
     }
 
     private void saveAnnoucement2Mysql(Announcement announcement){
-        jdbcTemplate.update("insert into t_announcement(title, content, time, band, type, st) values(?,?,?,?,?,?)",
-                announcement.getTitle(), announcement.getContent(), announcement.getTime(), announcement.getBand(), announcement.getType(), announcement.getSt());
+        jdbcTemplate.update("insert into t_announcement(title, content, time, exchange, type, st) values(?,?,?,?,?,?)",
+                announcement.getTitle(), announcement.getContent(), announcement.getTime(), announcement.getExchange(), announcement.getType(), announcement.getSt());
     }
 
     private Context context = null;

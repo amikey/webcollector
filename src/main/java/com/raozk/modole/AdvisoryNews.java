@@ -10,17 +10,17 @@ public class AdvisoryNews {
     private int id;
     private String title;
     private String content;
-    private String band;
+    private String exchange;
     private String type;
     private Date time;
     private Date st = new Date();
 
     public AdvisoryNews(){}
 
-    public AdvisoryNews(String title, String content, String band, String type, Date time){
+    public AdvisoryNews(String title, String content, String exchange, String type, Date time){
         this.title = title;
         this.content = content;
-        this.band = band;
+        this.exchange = exchange;
         this.type = type;
         this.time = time;
     }
@@ -49,12 +49,12 @@ public class AdvisoryNews {
         this.content = content;
     }
 
-    public String getBand() {
-        return band;
+    public String getExchange() {
+        return exchange;
     }
 
-    public void setBand(String band) {
-        this.band = band;
+    public void setExchange(String exchange) {
+        this.exchange = exchange;
     }
 
     public String getType() {

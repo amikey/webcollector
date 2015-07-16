@@ -45,8 +45,8 @@ public class AdvisoryNewsPipeline implements Pipeline {
     }
 
     private void saveAdvisoryNews2Mysql(AdvisoryNews advisoryNews){
-        jdbcTemplate.update("insert into t_advisorynews(title, content, time, band, type, st) values(?,?,?,?,?,?)",
-                advisoryNews.getTitle(), advisoryNews.getContent(), advisoryNews.getTime(), advisoryNews.getBand(), advisoryNews.getType(), advisoryNews.getSt());
+        jdbcTemplate.update("insert into t_advisorynews(title, content, time, exchange, type, st) values(?,?,?,?,?,?)",
+                advisoryNews.getTitle(), advisoryNews.getContent(), advisoryNews.getTime(), advisoryNews.getExchange(), advisoryNews.getType(), advisoryNews.getSt());
     }
 
 }
