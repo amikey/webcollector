@@ -39,8 +39,8 @@ public class AnnouncementPipeline implements Pipeline {
 
     public void process(ResultItems resultItems, Task task) {
         Announcement announcement = resultItems.get("announcement");
-        //if(announcement!=null && addCrawed(resultItems.getRequest().getUrl())){
-        if(announcement!=null){
+        if(announcement!=null && addCrawed(resultItems.getRequest().getUrl())){
+            //if(announcement!=null){
             saveAnnoucement2Redis(announcement);
             saveAnnoucement2Mysql(announcement);
             pubAnnoucement(announcement);
