@@ -69,6 +69,7 @@ public class AnnouncementPipeline implements Pipeline {
     }
 
     synchronized private void pubAnnoucement(Announcement announcement){
+        publisher.send("ac", 0);
         publisher.send(JSON.toJSONString(announcement), 0);
     }
 
