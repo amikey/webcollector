@@ -39,7 +39,8 @@ public class AnnouncementPipeline implements Pipeline {
 
     public void process(ResultItems resultItems, Task task) {
         Announcement announcement = resultItems.get("announcement");
-        if(announcement!=null && addCrawed(resultItems.getRequest().getUrl())){
+        //if(announcement!=null && addCrawed(resultItems.getRequest().getUrl())){
+        if(announcement!=null){
             saveAnnoucement2Redis(announcement);
             saveAnnoucement2Mysql(announcement);
             pubAnnoucement(announcement);
@@ -60,8 +61,8 @@ public class AnnouncementPipeline implements Pipeline {
 
     @PostConstruct
     private void init(){
-        Context context = ZMQ.context(1);
-        Socket publisher = context.socket(ZMQ.PUB);
+        context = ZMQ.context(1);
+        publisher = context.socket(ZMQ.PUB);
         publisher.setLinger(5000);
         publisher.setSndHWM(0);
         publisher.bind("tcp://*:8888");

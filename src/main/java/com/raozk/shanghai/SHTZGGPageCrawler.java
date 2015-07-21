@@ -38,7 +38,7 @@ public class SHTZGGPageCrawler extends AbstractBaseCrawler {
 
     public void process(Page page) {
         page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
-        List<String> links = page.getHtml().xpath("div[@class='db']/ul").links().all();
+        List<String> links = page.getHtml().xpath("div[@class='bd']/ul").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
             if (!crawed(link)) {
@@ -46,11 +46,11 @@ public class SHTZGGPageCrawler extends AbstractBaseCrawler {
             }
         }
         page.addTargetRequests(temp);
-        List<Selectable> nodes = page.getHtml().xpath("div[@class='detail']/div[@class='db']").nodes();
+        List<Selectable> nodes = page.getHtml().xpath("div[@class='detail']/div[@class='bd']/").nodes();
         if(nodes!=null && nodes.size()==3){
-            String title = nodes.get(0).get();
+            String title = nodes.get(0).xpath("div/text()").get();
             String content = nodes.get(2).get();
-            String time = nodes.get(1).get();
+            String time = nodes.get(1).xpath("div/text()").get();
             if(StringUtils.hasText(time)){
                 time = time.split("：")[1];
             }

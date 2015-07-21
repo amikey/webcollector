@@ -36,7 +36,7 @@ public class SHScheduler implements BaseSchduler {
     public void run() {
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 9 * * * ?")
     public void nFTZGGPage() {
         Spider spider = Spider.create(nFTZGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : nFTZGGPageCrawler.getStartUrls()){
@@ -45,7 +45,7 @@ public class SHScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 9 * * * ?")
     public void zxPage() {
         Spider spider = Spider.create(nFZXPageCrawler).addPipeline(advisoryNewsPipeline);
         for(String startUrl : nFZXPageCrawler.getStartUrls()){

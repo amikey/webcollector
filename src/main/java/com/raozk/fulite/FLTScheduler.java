@@ -39,7 +39,7 @@ public class FLTScheduler implements BaseSchduler {
     public void run() {
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 22 * * * ?")
     public void fLTSGGGPage() {
         Spider spider = Spider.create(fLTSGGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : fLTSGGGPageCrawler.getStartUrls()){
@@ -48,7 +48,7 @@ public class FLTScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 22 * * * ?")
     public void fLTTGGGPage() {
         Spider spider = Spider.create(fLTTGGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : fLTTGGGPageCrawler.getStartUrls()){
@@ -57,7 +57,7 @@ public class FLTScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 22 * * * ?")
     public void zxPage() {
         Spider spider = Spider.create(fLTZXPageCrawler).addPipeline(advisoryNewsPipeline);
         for(String startUrl : fLTZXPageCrawler.getStartUrls()){

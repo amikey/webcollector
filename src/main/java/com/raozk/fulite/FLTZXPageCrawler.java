@@ -42,7 +42,7 @@ public class FLTZXPageCrawler extends AbstractBaseCrawler {
     public void process(Page page) {
         page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
         LinkedList<String> temp = new LinkedList<String>();
-        List<Selectable> links = page.getHtml().xpath("ul[@class='global_tx_list4']").nodes();
+        List<Selectable> links = page.getHtml().xpath("ul[@class='global_tx_list4']/li").nodes();
         for(Selectable link : links){
             String linkUrl = link.links().all().get(0);
             if (!crawed(linkUrl)) {
@@ -52,8 +52,8 @@ public class FLTZXPageCrawler extends AbstractBaseCrawler {
             dateMap.put(linkUrl, date);
         }
         page.addTargetRequests(temp);
-        String title = page.getHtml().xpath("//div[@class='article']/h1/text()").get();
-        String content = page.getHtml().xpath("//div[@class='article_body']/html()").get();
+        String title = page.getHtml().xpath("//div[@id='article']/h1/text()").get();
+        String content = page.getHtml().xpath("//div[@id='article_body']/html()").get();
         String time = dateMap.get(page.getRequest().getUrl());
         if(StringUtils.hasText(title)&&StringUtils.hasText(content)) {
             //2015/7/8 21:55:53

@@ -43,7 +43,7 @@ public class NFScheduler implements BaseSchduler {
     public void run() {
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 45 * * * ?")
     public void nFTZGGPage() {
         Spider spider = Spider.create(nFTZGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : nFTZGGPageCrawler.getStartUrls()){
@@ -52,7 +52,7 @@ public class NFScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 45 * * * ?")
     public void nFSGGGPage() {
         Spider spider = Spider.create(nFSGGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : nFSGGGPageCrawler.getStartUrls()){
@@ -61,7 +61,7 @@ public class NFScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 45 * * * ?")
     public void nFTGGGPage() {
         Spider spider = Spider.create(nFTGGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : nFTGGGPageCrawler.getStartUrls()){
@@ -70,7 +70,7 @@ public class NFScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 45 * * * ?")
     public void zxPage() {
         Spider spider = Spider.create(nFZXPageCrawler).addPipeline(advisoryNewsPipeline);
         for(String startUrl : nFZXPageCrawler.getStartUrls()){
