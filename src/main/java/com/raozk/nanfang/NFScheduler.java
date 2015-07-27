@@ -42,7 +42,7 @@ public class NFScheduler implements BaseSchduler {
     public void run() {
     }
 
-    @Scheduled(cron = "0 45 * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void nFTZGGPage() {
         Spider spider = Spider.create(nFTZGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : nFTZGGPageCrawler.getStartUrls()){
@@ -51,7 +51,7 @@ public class NFScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 45 * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void nFSGGGPage() {
         Spider spider = Spider.create(nFSGGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : nFSGGGPageCrawler.getStartUrls()){
@@ -60,7 +60,7 @@ public class NFScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 45 * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void nFTGGGPage() {
         Spider spider = Spider.create(nFTGGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : nFTGGGPageCrawler.getStartUrls()){
@@ -69,7 +69,7 @@ public class NFScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 45 * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void zxPage() {
         Spider spider = Spider.create(nFZXPageCrawler).addPipeline(advisoryNewsPipeline);
         for(String startUrl : nFZXPageCrawler.getStartUrls()){
@@ -77,5 +77,68 @@ public class NFScheduler implements BaseSchduler {
         }
         spider.start();
     }
+
+    @Resource(type = NFJiaoYiShuJUPageCrawler.class)
+    BaseCrawler NFJiaoYiShuJUPageCrawler;
+
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void NFJiaoYiShuJUPageCrawler() {
+        Spider spider = Spider.create(NFJiaoYiShuJUPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : NFJiaoYiShuJUPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+    @Resource(type = NFTingPaiGongGaoPageCrawler.class)
+    BaseCrawler NFTingPaiGongGaoPageCrawler;
+
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void NFTingPaiGongGaoPageCrawler() {
+        Spider spider = Spider.create(NFTingPaiGongGaoPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : NFTingPaiGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+
+    @Resource(type = NFTeShuGongGaoPageCrawler.class)
+    BaseCrawler NFTeShuGongGaoPageCrawler;
+
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void NFTeShuGongGaoPageCrawler() {
+        Spider spider = Spider.create(NFTeShuGongGaoPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : NFTeShuGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+    @Resource(type = NFKuCunGongGaoPageCrawler.class)
+    BaseCrawler NFKuCunGongGaoPageCrawler;
+
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void NFKuCunGongGaoPageCrawler() {
+        Spider spider = Spider.create(NFKuCunGongGaoPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : NFKuCunGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+    @Resource(type = NFShouGouJiaoYiPageCrawler.class)
+    BaseCrawler NFShouGouJiaoYiPageCrawler;
+
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void NFShouGouJiaoYiPageCrawler() {
+        Spider spider = Spider.create(NFShouGouJiaoYiPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : NFShouGouJiaoYiPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+
 
 }

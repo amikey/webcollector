@@ -19,20 +19,20 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class NFTZGGPageCrawler extends AbstractBaseCrawler {
+public class NFKuCunGongGaoPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(NFTZGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(NFKuCunGongGaoPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://www.nfqbyp.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "06";
-    private static String type = "通知公告";
+    private static String type = "库存公告";
 
 
     static {
-        startUrls.add("http://www.nfqbyp.com/infomation.html?newsTypeID=16793&newsType=%E4%B8%AD%E5%BF%83%E9%80%9A%E5%91%8A");
+        startUrls.add("http://www.nfqbyp.com/infomation.html?newsTypeID=17510&newsType=%E5%BA%93%E5%AD%98%E5%85%AC%E5%91%8A");
     }
 
     public void process(Page page) {//http://www.nfqbyp.com/infomation.html?pageIndex=2&newsTypeID=16793&newsType=%E4%B8%AD%E5%BF%83%E9%80%9A%E5%91%8A
