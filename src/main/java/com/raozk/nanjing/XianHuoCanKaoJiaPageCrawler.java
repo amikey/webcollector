@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by rzk on 15-6-16.
  */
-@Component
+@Component("njXianHuoCanKaoJiaPageCrawler")
 public class XianHuoCanKaoJiaPageCrawler extends AbstractBaseCrawler {
 
     private static Logger logger = LoggerFactory.getLogger(XianHuoCanKaoJiaPageCrawler.class);

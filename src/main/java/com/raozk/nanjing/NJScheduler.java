@@ -36,8 +36,8 @@ public class NJScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Resource(type = JiaoYiShuJuPageCrawler.class)
-    BaseCrawler JiaoYiShuJuPageCrawler;
+    @Resource(name="njJiaoYiShuJuPageCrawler")
+    JiaoYiShuJuPageCrawler JiaoYiShuJuPageCrawler;
 
     @Scheduled(cron = "0/5 * * * * ?")
     public void JiaoYiShuJuPageCrawler() {
@@ -72,7 +72,7 @@ public class NJScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Resource(type = XianHuoCanKaoJiaPageCrawler.class)
+    @Resource(name="njXianHuoCanKaoJiaPageCrawler")
     BaseCrawler XianHuoCanKaoJiaPageCrawler;
 
     @Scheduled(cron = "0/5 * * * * ?")

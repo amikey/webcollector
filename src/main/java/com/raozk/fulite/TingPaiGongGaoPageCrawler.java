@@ -31,13 +31,13 @@ public class TingPaiGongGaoPageCrawler extends AbstractBaseCrawler {
 
 
     static {
-        startUrls.add("http://dzp.wjybk.com/?action-category-catid-124");
+        startUrls.add("http://dzp.wjybk.com/?action-category-catid-172");
     }
 
     private static Map<String, String> dateMap = new HashMap<String, String>();
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
+        //page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
         LinkedList<String> temp = new LinkedList<String>();
         List<Selectable> links = page.getHtml().xpath("ul[@class='global_tx_list4']/li").nodes();
         for(Selectable link : links){

@@ -17,21 +17,21 @@ import java.util.*;
 /**
  * Created by rzk on 15-6-16.
  */
-@Component("fltJiaoYiShuJuPageCrawler")
-public class JiaoYiShuJuPageCrawler extends AbstractBaseCrawler {
+@Component
+public class XianHuoCanKaoJiaPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(JiaoYiShuJuPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(XianHuoCanKaoJiaPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://dzp.wjybk.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "07";
-    private static String type = "交易数据";
+    private static String type = "现货参考价";
 
 
     static {
-        startUrls.add("http://dzp.wjybk.com/?action-category-catid-125");
+        startUrls.add("http://dzp.wjybk.com/?action-category-catid-129");
     }
 
     private static Map<String, String> dateMap = new HashMap<String, String>();
