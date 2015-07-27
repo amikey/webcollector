@@ -1,8 +1,6 @@
 package com.raozk.jiangsu;
 
 import com.raozk.crawler.BaseCrawler;
-import com.raozk.nanjing.NJZXPageCrawler;
-import com.raozk.piprline.AdvisoryNewsPipeline;
 import com.raozk.piprline.AnnouncementPipeline;
 import com.raozk.scheduler.BaseSchduler;
 import org.slf4j.Logger;

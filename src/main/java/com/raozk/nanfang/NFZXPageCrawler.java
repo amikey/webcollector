@@ -2,7 +2,6 @@ package com.raozk.nanfang;
 
 import com.raozk.crawler.AbstractBaseCrawler;
 import com.raozk.modole.AdvisoryNews;
-import com.raozk.modole.Announcement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,8 @@
-package com.raozk.nanjing;
+package com.raozk.nanjing_jia;
 
 import com.raozk.crawler.BaseCrawler;
 import com.raozk.piprline.AdvisoryNewsPipeline;
 import com.raozk.scheduler.BaseSchduler;
-import com.raozk.zhongnan.ZNZXPageCrawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -27,7 +26,7 @@ public class NJZXScheduler implements BaseSchduler {
     @Resource(type = AdvisoryNewsPipeline.class)
     Pipeline pipeline;
 
-    @Scheduled(cron = "0 15 14 * * ?")
+    //@Scheduled(cron = "0 15 14 * * ?")
     public void run() {
         Spider spider = Spider.create(baseCrawler).addPipeline(pipeline);
         for(String startUrl : baseCrawler.getStartUrls()){

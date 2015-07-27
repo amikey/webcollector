@@ -1,7 +1,6 @@
 package com.raozk.nanjing;
 
 import com.raozk.crawler.AbstractBaseCrawler;
-import com.raozk.modole.AdvisoryNews;
 import com.raozk.modole.Announcement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,25 +19,25 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class NJZXPageCrawler extends AbstractBaseCrawler {
+public class JiaoYiShuJuPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(NJZXPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(JiaoYiShuJuPageCrawler.class);
 
-    private Site site = Site.me().setDomain("http://www.njwjsqbyp.com/");
+    private Site site = Site.me().setDomain("http://www.zgqbyp.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "01";
-    private static String type = "咨询";
+    private static String type = "交易数据";
 
 
     static {
-        startUrls.add("http://www.njwjsqbyp.com/list.asp?id=4");
+        startUrls.add("http://www.zgqbyp.com/web/news/11.html");
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("http://www\\.njwjsqbyp\\.com/list\\.asp\\?id=4&Page=\\d+").all());
-        List<String> links = page.getHtml().links().regex("http://www\\.njwjsqbyp\\.com/show\\.asp\\?id=\\d+").all();
+        //page.addTargetRequests(page.getHtml().xpath("//div[@class='fenye']").links().all());
+        List<String> links = page.getHtml().xpath("//div[@class='ilist']/ul/li").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
             if (!crawed(link)) {
@@ -50,9 +49,11 @@ public class NJZXPageCrawler extends AbstractBaseCrawler {
         String content = page.getHtml().xpath("//div[@class='neirong_text']/html()").get();
         String time = page.getHtml().xpath("//div[@class='neirong_note']/text()").get();
         if(StringUtils.hasText(time)){
-            time = time.substring(0,17);
+            time = time.split("已访问")[0].trim();
         }
         if(StringUtils.hasText(title)&&StringUtils.hasText(content)) {
+            //2015/7/8 21:55:53
+            //page.putField("announcement", new Announcement(title, content, band, type, time));
             Date timeDate = null;
             try {
                 timeDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(time);
@@ -64,7 +65,7 @@ public class NJZXPageCrawler extends AbstractBaseCrawler {
                     timeDate = new Date();
                 }
             }
-            page.putField("advisoryNews", new AdvisoryNews(title, content, band, type, timeDate));
+            page.putField("announcement", new Announcement(title, content, band, type, timeDate));
             logger.info("crawed:"+title);
         }
     }

@@ -1,7 +1,6 @@
 package com.raozk.nanfang;
 
 import com.raozk.crawler.BaseCrawler;
-import com.raozk.nanjing.NJZXPageCrawler;
 import com.raozk.piprline.AdvisoryNewsPipeline;
 import com.raozk.piprline.AnnouncementPipeline;
 import com.raozk.scheduler.BaseSchduler;

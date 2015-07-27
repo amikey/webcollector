@@ -66,4 +66,67 @@ public class FLTScheduler implements BaseSchduler {
         spider.start();
     }
 
+    @Resource(type = ShangShiGongGaoPageCrawler.class)
+    BaseCrawler ShangShiGongGaoPageCrawler;
+
+    @Scheduled(cron = "0 22 * * * ?")
+    public void ShangShiGongGaoPageCrawler() {
+        Spider spider = Spider.create(ShangShiGongGaoPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : ShangShiGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+    @Resource(type = JiaoYiGongGaoPageCrawler.class)
+    BaseCrawler JiaoYiGongGaoPageCrawler;
+
+    @Scheduled(cron = "0 22 * * * ?")
+    public void JiaoYiGongGaoPageCrawler() {
+        Spider spider = Spider.create(JiaoYiGongGaoPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : JiaoYiGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+
+    @Resource(type = ZhongQianGongGaoPageCrawler.class)
+    BaseCrawler ZhongQianGongGaoPageCrawler;
+
+    @Scheduled(cron = "0 22 * * * ?")
+    public void ZhongQianGongGaoPageCrawler() {
+        Spider spider = Spider.create(ZhongQianGongGaoPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : ZhongQianGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+    @Resource(type = TingPaiGongGaoPageCrawler.class)
+    BaseCrawler TingPaiGongGaoPageCrawler;
+
+    @Scheduled(cron = "0 22 * * * ?")
+    public void TingPaiGongGaoPageCrawler() {
+        Spider spider = Spider.create(TingPaiGongGaoPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : TingPaiGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+
+    @Resource(type = JiaoYiShuJuPageCrawler.class)
+    BaseCrawler JiaoYiShuJuPageCrawler;
+
+    @Scheduled(cron = "0 22 * * * ?")
+    public void JiaoYiShuJuPageCrawler() {
+        Spider spider = Spider.create(JiaoYiShuJuPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : JiaoYiShuJuPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+
 }
