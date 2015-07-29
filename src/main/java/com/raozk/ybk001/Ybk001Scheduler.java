@@ -1,7 +1,6 @@
 package com.raozk.ybk001;
 
 import com.raozk.crawler.BaseCrawler;
-import com.raozk.crawler.XX007PageCrawler;
 import com.raozk.piprline.MobilePipeline;
 import com.raozk.piprline.RedisMobilePipeline;
 import com.raozk.scheduler.BaseSchduler;

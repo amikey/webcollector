@@ -1,4 +1,4 @@
-package com.raozk.jinmajia;
+package com.raozk.jinmajia.old;
 
 import com.raozk.crawler.AbstractBaseCrawler;
 import com.raozk.modole.Announcement;
@@ -18,27 +18,27 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class JMJTZGGPageCrawler extends AbstractBaseCrawler {
+public class JMJSGGGPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(JMJTZGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(JMJSGGGPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "03";
-    private static String type = "通知公告";
+    private static String type = "申购公告";
 
     static {
-        startUrls.add("http://qbyp.jinmajia.com/article/mtbd/qbyp/gggs/pttz/");
+        startUrls.add("http://qbyp.jinmajia.com/article/mtbd/qbyp/gggs/sggp/");
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/pttz/index\\.shtml\\?\\d+").all());
-        List<String> links = page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/pttz/\\d+/\\d+.shtml").all();
+        page.addTargetRequests(page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/sggp/index\\.shtml\\?\\d+").all());
+        List<String> links = page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/sggp/\\d+/\\d+.shtml").all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
             }
         }
@@ -50,13 +50,13 @@ public class JMJTZGGPageCrawler extends AbstractBaseCrawler {
             if(ts.length>1){
                 String time = ts[1];
                 time = time.substring(0, time.indexOf("'"));
-                if(StringUtils.hasText(time)) {
+                if(StringUtils.hasText(time)){
                     try {
                         page.putField("announcement", new Announcement(title, content, band, type, new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(time)));
                     } catch (ParseException e) {
                         logger.error("get time error", e);
                     }
-                    logger.info("crawed:"+title);
+                    logger.info("crawed:" + title);
                 }
             }
         }

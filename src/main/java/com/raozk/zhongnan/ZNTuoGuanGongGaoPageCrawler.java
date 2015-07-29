@@ -1,7 +1,6 @@
 package com.raozk.zhongnan;
 
 import com.raozk.crawler.AbstractBaseCrawler;
-import com.raozk.modole.AdvisoryNews;
 import com.raozk.modole.Announcement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,33 +18,28 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class ZNZXPageCrawler extends AbstractBaseCrawler {
+public class ZNTuoGuanGongGaoPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(ZNZXPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(ZNTuoGuanGongGaoPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "02";
-    private static String type = "咨询";
+    private static String type = "1";
+
 
     static {
-        startUrls.add("http://www.znypjy.com/a/xingyezixun/xingyexinwen/");
-        startUrls.add("http://www.znypjy.com/a/xingyezixun/shichangbaojia/");
-        startUrls.add("http://www.znypjy.com/a/xingyezixun/zhongjinyanjiu/");
-        startUrls.add("http://www.znypjy.com/a/xingyezixun/mingjiazhuanlan/");
-        startUrls.add("http://www.znypjy.com/a/xingyezixun/fenghuangzongshu/");
-        startUrls.add("http://www.znypjy.com/a/xingyezixun/quancangzongshu/");
-        startUrls.add("http://www.znypjy.com/a/xingyezixun/dinghanzongshu/");
+        startUrls.add("http://www.znypjy.com/a/xinxipilu/tuoguangonggao/");
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xingyezixun/.*/list_\\d+_\\d+.html").all());
-        List<String> links = page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xingyezixun/.*/\\d+/\\d+/\\d+.html").all();
+        page.addTargetRequests(page.getHtml().xpath("//ul[@class='pagelist']").links().all());
+        List<String> links = page.getHtml().xpath("//div[@class='main_right_list']").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
             }
         }
@@ -58,11 +52,11 @@ public class ZNZXPageCrawler extends AbstractBaseCrawler {
         }
         if(StringUtils.hasText(title)&&StringUtils.hasText(content)) {
             try {
-                page.putField("advisoryNews", new AdvisoryNews(title, content, band, type, new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(time)));
+                page.putField("announcement", new Announcement(title, content, band, type, new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(time)));
             } catch (ParseException e) {
                 logger.error("get time error", e);
             }
-            logger.info("crawed:" + title);
+            logger.info("crawed:"+title);
         }
     }
 

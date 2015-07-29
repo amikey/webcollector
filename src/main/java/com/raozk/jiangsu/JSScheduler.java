@@ -20,11 +20,6 @@ public class JSScheduler implements BaseSchduler {
 
     private static Logger logger = LoggerFactory.getLogger(JSScheduler.class);
 
-    @Resource(type = JSTGGGPageCrawler.class)
-    BaseCrawler jSTGGGPageCrawler;
-
-    @Resource(type = JSSGGGPageCrawler.class)
-    BaseCrawler jSSGGGPageCrawler;
 
     @Resource(type = AnnouncementPipeline.class)
     Pipeline pipeline;
@@ -33,22 +28,98 @@ public class JSScheduler implements BaseSchduler {
 
     }
 
-    @Scheduled(cron = "0 15 14 * * ?")
-    public void jSTGGGPageCrawler() {
-        Spider spider = Spider.create(jSTGGGPageCrawler).addPipeline(pipeline);
-        for(String startUrl : jSTGGGPageCrawler.getStartUrls()){
+    @Resource(type = JSGuaPaiGongGaoPageCrawler.class)
+    JSGuaPaiGongGaoPageCrawler JSGuaPaiGongGaoPageCrawler;
+
+
+    @Scheduled(cron = "0 40 22 * * ?")
+    public void JSGuaPaiGongGaoPageCrawler() {
+        Spider spider = Spider.create(JSGuaPaiGongGaoPageCrawler).addPipeline(pipeline);
+        for(String startUrl : JSGuaPaiGongGaoPageCrawler.getStartUrls()){
             spider.addUrl(startUrl);
         }
         spider.start();
     }
 
-    @Scheduled(cron = "0 15 14 * * ?")
-    public void jSSGGGPageCrawler() {
-        Spider spider = Spider.create(jSSGGGPageCrawler).addPipeline(pipeline);
-        for(String startUrl : jSSGGGPageCrawler.getStartUrls()){
+    @Resource(type = JSZhongQianGongGaoPageCrawler.class)
+    JSZhongQianGongGaoPageCrawler JSZhongQianGongGaoPageCrawler;
+
+
+    @Scheduled(cron = "0 40 22 * * ?")
+    public void JSZhongQianGongGaoPageCrawler() {
+        Spider spider = Spider.create(JSZhongQianGongGaoPageCrawler).addPipeline(pipeline);
+        for(String startUrl : JSZhongQianGongGaoPageCrawler.getStartUrls()){
             spider.addUrl(startUrl);
         }
         spider.start();
     }
+
+    @Resource(type = JSZaiGuaPaiGongGaoPageCrawler.class)
+    JSZaiGuaPaiGongGaoPageCrawler JSZaiGuaPaiGongGaoPageCrawler;
+
+
+    @Scheduled(cron = "0 40 22 * * ?")
+    public void JSZaiGuaPaiGongGaoPageCrawler() {
+        Spider spider = Spider.create(JSZaiGuaPaiGongGaoPageCrawler).addPipeline(pipeline);
+        for(String startUrl : JSZaiGuaPaiGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+    @Resource(type = JSTingPaiGongGaoPageCrawler.class)
+    JSTingPaiGongGaoPageCrawler JSTingPaiGongGaoPageCrawler;
+
+
+    @Scheduled(cron = "0 40 22 * * ?")
+    public void JSTingPaiGongGaoPageCrawler() {
+        Spider spider = Spider.create(JSTingPaiGongGaoPageCrawler).addPipeline(pipeline);
+        for(String startUrl : JSTingPaiGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+    @Resource(type = JSFuPaiGongGaoPageCrawler.class)
+    JSFuPaiGongGaoPageCrawler JSFuPaiGongGaoPageCrawler;
+
+
+    @Scheduled(cron = "0 40 22 * * ?")
+    public void JSFuPaiGongGaoPageCrawler() {
+        Spider spider = Spider.create(JSFuPaiGongGaoPageCrawler).addPipeline(pipeline);
+        for(String startUrl : JSFuPaiGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+    @Resource(type = JSTuoGuanGongGaoPageCrawler.class)
+    JSTuoGuanGongGaoPageCrawler JSTuoGuanGongGaoPageCrawler;
+
+
+    @Scheduled(cron = "0 40 22 * * ?")
+    public void JSTuoGuanGongGaoPageCrawler() {
+        Spider spider = Spider.create(JSTuoGuanGongGaoPageCrawler).addPipeline(pipeline);
+        for(String startUrl : JSTuoGuanGongGaoPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+
+    @Resource(type = JSXianHuoCaiJiJiaPageCrawler.class)
+    JSXianHuoCaiJiJiaPageCrawler JSXianHuoCaiJiJiaPageCrawler;
+
+
+    @Scheduled(cron = "0 40 22 * * ?")
+    public void JSXianHuoCaiJiJiaPageCrawler() {
+        Spider spider = Spider.create(JSXianHuoCaiJiJiaPageCrawler).addPipeline(pipeline);
+        for(String startUrl : JSXianHuoCaiJiJiaPageCrawler.getStartUrls()){
+            spider.addUrl(startUrl);
+        }
+        spider.start();
+    }
+
+
 
 }

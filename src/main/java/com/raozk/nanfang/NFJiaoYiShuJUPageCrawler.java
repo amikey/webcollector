@@ -28,7 +28,7 @@ public class NFJiaoYiShuJUPageCrawler extends AbstractBaseCrawler {
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "06";
-    private static String type = "交易数据";
+    private static String type = "3";
 
 
     static {
@@ -36,11 +36,11 @@ public class NFJiaoYiShuJUPageCrawler extends AbstractBaseCrawler {
     }
 
     public void process(Page page) {//http://www.nfqbyp.com/infomation.html?pageIndex=2&newsTypeID=16793&newsType=%E4%B8%AD%E5%BF%83%E9%80%9A%E5%91%8A
-        //page.addTargetRequests(page.getHtml().xpath("div[@class='page_num']").links().all());
+        page.addTargetRequests(page.getHtml().xpath("div[@class='page_num']").links().all());
         List<String> links = page.getHtml().xpath("ul[@class='list_news']").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
            }
         }

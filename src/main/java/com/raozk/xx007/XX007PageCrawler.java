@@ -1,9 +1,9 @@
-package com.raozk.crawler;
+package com.raozk.xx007;
 
+import com.raozk.crawler.AbstractBaseCrawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.selector.Selectable;
@@ -30,8 +30,9 @@ public class XX007PageCrawler extends AbstractBaseCrawler{
 
     public void process(Page page) {
         String url = page.getRequest().getUrl();
-        page.addTargetRequests(page.getHtml().links().regex("http://www\\.xx007\\.cn/.*dispbbs.*").all());
-        page.addTargetRequests(page.getHtml().links().regex("http://www\\.xx007\\.cn/index\\.asp\\?boardid=\\d+").all());
+        Page page1 = page;
+        page1.addTargetRequests(page.getHtml().links().regex("http://www\\.xx007\\.cn/.*dispbbs.*").all());
+        page1.addTargetRequests(page.getHtml().links().regex("http://www\\.xx007\\.cn/index\\.asp\\?boardid=\\d+").all());
         if(url.indexOf("dispbbs")>0){
             List<Selectable> contents = page.getHtml().xpath("div[@class='post']").nodes();
             for(Selectable div : contents){

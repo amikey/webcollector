@@ -1,4 +1,4 @@
-package com.raozk.nanfang;
+package com.raozk.zgyjs;
 
 import com.raozk.crawler.AbstractBaseCrawler;
 import com.raozk.modole.Announcement;
@@ -19,37 +19,36 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class NFTZGGPageCrawler extends AbstractBaseCrawler {
+public class ZYTuoGuanGongGaoPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(NFTZGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(ZYTuoGuanGongGaoPageCrawler.class);
 
-    private Site site = Site.me().setDomain("http://www.nfqbyp.com/");
+    private Site site = Site.me().setDomain("http://www.ttybk.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
-    private static String band = "06";
-    private static String type = "3";
-
+    private static String band = "05";
+    private static String type = "1";
 
     static {
-        startUrls.add("http://www.nfqbyp.com/infomation.html?newsTypeID=16793&newsType=%E4%B8%AD%E5%BF%83%E9%80%9A%E5%91%8A");
+        startUrls.add("http://www.ttybk.com/zgyjs/list.asp?id=3");
     }
 
-    public void process(Page page) {//http://www.nfqbyp.com/infomation.html?pageIndex=2&newsTypeID=16793&newsType=%E4%B8%AD%E5%BF%83%E9%80%9A%E5%91%8A
-        page.addTargetRequests(page.getHtml().xpath("div[@class='page_num']").links().all());
-        List<String> links = page.getHtml().xpath("ul[@class='list_news']").links().all();
+    public void process(Page page) {
+        page.addTargetRequests(page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='page']").links().all());
+        List<String> links = page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='list']").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
             if (!crawed(band, type, link)) {
                 temp.addFirst(link);
-           }
+            }
         }
         page.addTargetRequests(temp);
-        String title = page.getHtml().xpath("//div[@class='dnews_title']/text()").get();
-        String content = page.getHtml().xpath("//div[@class='dnews_content']/html()").get();
-        String time = page.getHtml().xpath("//div[@class='dnews_info']/text()").get();
+        String title = page.getHtml().xpath("//div[@class='newstitle']/text()").get();
+        String content = page.getHtml().xpath("//div[@class='news_w']/html()").get();
+        String time = page.getHtml().xpath("//div[@class='newstime']/text()").get();
         if(StringUtils.hasText(time)){
-            time = time.substring(0,19).trim();
+            time = time.split("时间：")[1].trim();
         }
         if(StringUtils.hasText(title)&&StringUtils.hasText(content)) {
             //2015/7/8 21:55:53

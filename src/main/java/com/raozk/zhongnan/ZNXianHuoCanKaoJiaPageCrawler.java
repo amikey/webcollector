@@ -18,28 +18,28 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class ZNTZGGPageCrawler extends AbstractBaseCrawler {
+public class ZNXianHuoCanKaoJiaPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(ZNTZGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(ZNXianHuoCanKaoJiaPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "02";
-    private static String type = "通知公告";
+    private static String type = "3";
 
 
     static {
-        startUrls.add("http://www.znypjy.com/a/xinxipilu/tongzhigonggao/list_7_1.html");
+        startUrls.add("http://www.znypjy.com/a/xinxipilu/xianhuocankaojia/");
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xinxipilu/tongzhigonggao/list_\\d+_\\d+.html").all());
-        List<String> links = page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xinxipilu/tongzhigonggao/\\d+/\\d+/\\d+.html").all();
+        page.addTargetRequests(page.getHtml().xpath("//ul[@class='pagelist']").links().all());
+        List<String> links = page.getHtml().xpath("//div[@class='main_right_list']").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
             }
         }

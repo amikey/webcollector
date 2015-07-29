@@ -19,20 +19,20 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class JSSGGGPageCrawler extends AbstractBaseCrawler {
+public class JSFuPaiGongGaoPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(JSSGGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(JSFuPaiGongGaoPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://ybk.jscaee.com.cn/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "04";
-    private static String type = "申购公告";
+    private static String type = "3";
 
 
     static {
-        startUrls.add("http://ybk.jscaee.com.cn/announcement/listing/");
+        startUrls.add("http://ybk.jscaee.com.cn/announcement/resumption/");
     }
 
     public void process(Page page) {//http://ybk.jscaee.com.cn/announcement/trusteeship/index_p3.html
@@ -41,7 +41,7 @@ public class JSSGGGPageCrawler extends AbstractBaseCrawler {
         List<String> links = page.getHtml().xpath("//ul[@class='link-list']/").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
             }
         }

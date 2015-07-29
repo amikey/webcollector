@@ -13,6 +13,8 @@ public class Announcement {
     private String exchange;
     private String type;
     private Date time;
+    private String domain;
+    private String url;
     private Date st = new Date();
 
     public Announcement(){}
@@ -79,5 +81,21 @@ public class Announcement {
 
     public void setSt(Date st) {
         this.st = st;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

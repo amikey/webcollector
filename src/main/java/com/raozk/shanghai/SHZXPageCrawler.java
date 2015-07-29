@@ -42,7 +42,7 @@ public class SHZXPageCrawler extends AbstractBaseCrawler {
         List<String> links = page.getHtml().xpath("div[@class='bd']/ul").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
             }
         }

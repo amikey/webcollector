@@ -1,4 +1,4 @@
-package com.raozk.nanjing_jia;
+package com.raozk.zgyjs;
 
 import com.raozk.crawler.AbstractBaseCrawler;
 import com.raozk.modole.Announcement;
@@ -19,48 +19,47 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class NJTZGGPageCrawler extends AbstractBaseCrawler {
+public class ZYShangShiGongGaoPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(NJTZGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(ZYShangShiGongGaoPageCrawler.class);
 
-    private Site site = Site.me().setDomain("http://www.njwjsqbyp.com/");
+    private Site site = Site.me().setDomain("http://www.ttybk.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
-    private static String band = "01";
-    private static String type = "通知公告";
-
+    private static String band = "05";
+    private static String type = "3";
 
     static {
-        startUrls.add("http://www.njwjsqbyp.com/list.asp?id=1");
+        startUrls.add("http://www.ttybk.com/zgyjs/list.asp?id=50");
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("http://www\\.njwjsqbyp\\.com/list\\.asp\\?id=1&Page=\\d+").all());
-        List<String> links = page.getHtml().links().regex("http://www\\.njwjsqbyp\\.com/show\\.asp\\?id=\\d+").all();
+        page.addTargetRequests(page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='page']").links().all());
+        List<String> links = page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='list']").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
             }
         }
         page.addTargetRequests(temp);
-        String title = page.getHtml().xpath("//div[@class='neirong_title']/text()").get();
-        String content = page.getHtml().xpath("//div[@class='neirong_text']/html()").get();
-        String time = page.getHtml().xpath("//div[@class='neirong_note']/text()").get();
+        String title = page.getHtml().xpath("//div[@class='newstitle']/text()").get();
+        String content = page.getHtml().xpath("//div[@class='news_w']/html()").get();
+        String time = page.getHtml().xpath("//div[@class='newstime']/text()").get();
         if(StringUtils.hasText(time)){
-            time = time.trim();
+            time = time.split("时间：")[1].trim();
         }
         if(StringUtils.hasText(title)&&StringUtils.hasText(content)) {
             //2015/7/8 21:55:53
             //page.putField("announcement", new Announcement(title, content, band, type, time));
             Date timeDate = null;
             try {
-                timeDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(time);
+                timeDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(time);
             } catch (ParseException e) {
                 logger.error("parse time error", e);
                 try {
-                    timeDate = new SimpleDateFormat("yyyy/MM/dd").parse(time);
+                    timeDate = new SimpleDateFormat("yyyy-MM-dd").parse(time);
                 } catch (ParseException e1) {
                     timeDate = new Date();
                 }

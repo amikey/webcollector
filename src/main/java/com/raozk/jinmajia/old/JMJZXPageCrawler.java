@@ -1,8 +1,7 @@
-package com.raozk.jinmajia;
+package com.raozk.jinmajia.old;
 
 import com.raozk.crawler.AbstractBaseCrawler;
 import com.raozk.modole.AdvisoryNews;
-import com.raozk.modole.Announcement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -39,7 +38,7 @@ public class JMJZXPageCrawler extends AbstractBaseCrawler {
         List<String> links = page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/bszx/\\d+/\\d+.shtml").all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
         }
     }

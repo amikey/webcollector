@@ -27,7 +27,7 @@ public class ZhongQianGongGaoPageCrawler extends AbstractBaseCrawler {
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "07";
-    private static String type = "中签公告";
+    private static String type = "3";
 
 
     static {
@@ -37,12 +37,12 @@ public class ZhongQianGongGaoPageCrawler extends AbstractBaseCrawler {
     private static Map<String, String> dateMap = new HashMap<String, String>();
 
     public void process(Page page) {
-        //page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
+        page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
         LinkedList<String> temp = new LinkedList<String>();
         List<Selectable> links = page.getHtml().xpath("ul[@class='global_tx_list4']/li").nodes();
         for(Selectable link : links){
             String linkUrl = link.links().all().get(0);
-            if (!crawed(linkUrl)) {
+            if (!crawed(band, type, linkUrl)) {
                 temp.addFirst(linkUrl);
             }
             String date = link.xpath("span[@class='box_r']/text()").get();

@@ -18,27 +18,28 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class ZNTGGGPageCrawler extends AbstractBaseCrawler {
+public class ZNJiaoYiShuJuPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(ZNTGGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(ZNJiaoYiShuJuPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "02";
-    private static String type = "托管公告";
+    private static String type = "3";
+
 
     static {
-        startUrls.add("http://www.znypjy.com/a/xinxipilu/tuoguangonggao/");
+        startUrls.add("http://www.znypjy.com/a/xinxipilu/jiaoyishuju/");
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xinxipilu/tuoguangonggao/list_\\d+_\\d+.html").all());
-        List<String> links = page.getHtml().links().regex("http://www\\.znypjy\\.com/a/xinxipilu/tuoguangonggao/\\d+/\\d+/\\d+.html").all();
+        page.addTargetRequests(page.getHtml().xpath("//ul[@class='pagelist']").links().all());
+        List<String> links = page.getHtml().xpath("//div[@class='main_right_list']").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
             }
         }

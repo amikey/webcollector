@@ -27,7 +27,7 @@ public class FLTTGGGPageCrawler extends AbstractBaseCrawler {
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "07";
-    private static String type = "托管公告";
+    private static String type = "1";
 
 
     static {
@@ -37,12 +37,12 @@ public class FLTTGGGPageCrawler extends AbstractBaseCrawler {
     private static Map<String, String> dateMap = new HashMap<String, String>();
 
     public void process(Page page) {//http://www.nfqbyp.com/infomation.html?pageIndex=2&newsTypeID=16793&newsType=%E4%B8%AD%E5%BF%83%E9%80%9A%E5%91%8A
-        //page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
+        page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
         LinkedList<String> temp = new LinkedList<String>();
         List<Selectable> links = page.getHtml().xpath("ul[@class='global_tx_list4']/li").nodes();
         for(Selectable link : links){
             String linkUrl = link.links().all().get(0);
-            if (!crawed(linkUrl)) {
+            if (!crawed(band, type, linkUrl)) {
                 temp.addFirst(linkUrl);
             }
             String date = link.xpath("span[@class='box_r']/text()").get();

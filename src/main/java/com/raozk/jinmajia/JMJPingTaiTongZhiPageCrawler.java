@@ -18,27 +18,27 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class JMJTGGGPageCrawler extends AbstractBaseCrawler {
+public class JMJPingTaiTongZhiPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(JMJTGGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(JMJPingTaiTongZhiPageCrawler.class);
 
-    private Site site = Site.me().setDomain("http://qbyp.jinmajia.com/");
+    private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "03";
-    private static String type = "托管公告";
+    private static String type = "3";
 
     static {
-        startUrls.add("http://qbyp.jinmajia.com/article/mtbd/qbyp/gggs/rksq/");
+        startUrls.add("http://qbyp.jinmajia.com/article/mtbd/qbyp/gggs/pttz/");
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/rksq/index\\.shtml\\?\\d+").all());
-        List<String> links = page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/rksq/\\d+/\\d+.shtml").all();
+        page.addTargetRequests(page.getHtml().xpath("//div[@class='list_art']/center").links().all());
+        List<String> links = page.getHtml().xpath("//ul[@class='article']").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
             }
         }

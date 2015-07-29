@@ -2,7 +2,6 @@ package com.raozk.jinmajia;
 
 import com.raozk.crawler.AbstractBaseCrawler;
 import com.raozk.modole.Announcement;
-import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,10 +9,8 @@ import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,27 +18,27 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class JMJSGGGPageCrawler extends AbstractBaseCrawler {
+public class JMJRuKuGongGaoPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(JMJSGGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(JMJRuKuGongGaoPageCrawler.class);
 
     private Site site = Site.me().setDomain("http://www.znypjy.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
     private static String band = "03";
-    private static String type = "申购公告";
+    private static String type = "1";
 
     static {
         startUrls.add("http://qbyp.jinmajia.com/article/mtbd/qbyp/gggs/sggp/");
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/sggp/index\\.shtml\\?\\d+").all());
-        List<String> links = page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/sggp/\\d+/\\d+.shtml").all();
+        page.addTargetRequests(page.getHtml().xpath("//div[@class='list_art']/center").links().all());
+        List<String> links = page.getHtml().xpath("//ul[@class='article']").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(link)) {
+            if (!crawed(band, type, link)) {
                 temp.addFirst(link);
             }
         }
