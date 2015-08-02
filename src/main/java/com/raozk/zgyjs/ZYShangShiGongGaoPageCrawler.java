@@ -35,7 +35,7 @@ public class ZYShangShiGongGaoPageCrawler extends AbstractBaseCrawler {
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='page']").links().all());
+        if("1".equals(appconfig.get("crawAll"))) page.addTargetRequests(page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='page']").links().all());
         List<String> links = page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='list']").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {

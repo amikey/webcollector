@@ -27,7 +27,7 @@ public class NJScheduler implements BaseSchduler {
     @Resource(type = AnnouncementPipeline.class)
     Pipeline pipeline;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void tongZhiGongGaoPageCrawler() {
         Spider spider = Spider.create(tongZhiGongGaoPageCrawler).addPipeline(pipeline);
         for(String startUrl : tongZhiGongGaoPageCrawler.getStartUrls()){
@@ -39,7 +39,7 @@ public class NJScheduler implements BaseSchduler {
     @Resource(name="njJiaoYiShuJuPageCrawler")
     JiaoYiShuJuPageCrawler JiaoYiShuJuPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void JiaoYiShuJuPageCrawler() {
         Spider spider = Spider.create(JiaoYiShuJuPageCrawler).addPipeline(pipeline);
         for(String startUrl : JiaoYiShuJuPageCrawler.getStartUrls()){
@@ -51,7 +51,7 @@ public class NJScheduler implements BaseSchduler {
     @Resource(type = ShenGouGongGaoPageCrawler.class)
     BaseCrawler ShenGouGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void ShenGouGongGaoPageCrawler() {
         Spider spider = Spider.create(ShenGouGongGaoPageCrawler).addPipeline(pipeline);
         for(String startUrl : ShenGouGongGaoPageCrawler.getStartUrls()){
@@ -63,7 +63,7 @@ public class NJScheduler implements BaseSchduler {
     @Resource(type = TuoGuanGongGaoPageCrawler.class)
     BaseCrawler TuoGuanGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void TuoGuanGongGaoPageCrawler() {
         Spider spider = Spider.create(TuoGuanGongGaoPageCrawler).addPipeline(pipeline);
         for(String startUrl : TuoGuanGongGaoPageCrawler.getStartUrls()){
@@ -75,7 +75,7 @@ public class NJScheduler implements BaseSchduler {
     @Resource(name="njXianHuoCanKaoJiaPageCrawler")
     BaseCrawler XianHuoCanKaoJiaPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void XianHuoCanKaoJiaPageCrawler() {
         Spider spider = Spider.create(XianHuoCanKaoJiaPageCrawler).addPipeline(pipeline);
         for(String startUrl : XianHuoCanKaoJiaPageCrawler.getStartUrls()){
@@ -87,7 +87,7 @@ public class NJScheduler implements BaseSchduler {
     @Resource(type = RuKuGongGaoPageCrawler.class)
     BaseCrawler RuKuGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void RuKuGongGaoPageCrawler() {
         Spider spider = Spider.create(RuKuGongGaoPageCrawler).addPipeline(pipeline);
         for(String startUrl : RuKuGongGaoPageCrawler.getStartUrls()){

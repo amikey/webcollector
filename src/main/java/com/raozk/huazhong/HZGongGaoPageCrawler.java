@@ -1,4 +1,4 @@
-package com.raozk.shanghai;
+package com.raozk.huazhong;
 
 import com.raozk.crawler.AbstractBaseCrawler;
 import com.raozk.modole.Announcement;
@@ -20,25 +20,25 @@ import java.util.List;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class SHTZGGPageCrawler extends AbstractBaseCrawler {
+public class HZGongGaoPageCrawler extends AbstractBaseCrawler {
 
-    private static Logger logger = LoggerFactory.getLogger(SHTZGGPageCrawler.class);
+    private static Logger logger = LoggerFactory.getLogger(HZGongGaoPageCrawler.class);
 
-    private Site site = Site.me().setDomain("http://www.shscce.com/");
+    private Site site = Site.me().setDomain("http://www.hbcpre.com/");
 
     private static List<String> startUrls = new LinkedList<String>();
 
-    private static String band = "08";
+    private static String band = "09";
     //private static String type = "3";
 
 
     static {
-        startUrls.add("http://www.shscce.com/html/shscce/zxgg/index_1.shtml");
+        startUrls.add("http://www.hbcpre.com/index.php/index-show-tid-26.html");
     }
 
     public void process(Page page) {
-        if("1".equals(appconfig.get("crawAll"))) page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
-        List<Selectable> links = page.getHtml().xpath("div[@class='bd']/ul/li").nodes();
+        if("1".equals(appconfig.get("crawAll"))) page.addTargetRequests(page.getHtml().xpath("div[@class='page']").links().all());
+        List<Selectable> links = page.getHtml().xpath("div[@class='news']/ul/li").nodes();
         LinkedList<String> temp = new LinkedList<String>();
         for(Selectable selectable : links) {
             String title = selectable.xpath("a/text()").get();
@@ -50,14 +50,18 @@ public class SHTZGGPageCrawler extends AbstractBaseCrawler {
             }
         }
         page.addTargetRequests(temp);
-        List<Selectable> nodes = page.getHtml().xpath("div[@class='detail']/div[@class='bd']/").nodes();
-        if(nodes!=null && nodes.size()==3){
+        List<Selectable> nodes = page.getHtml().xpath("div[@class='newsfi']/").nodes();
+        if(nodes!=null && nodes.size()>=3){
             String title = nodes.get(0).xpath("div/text()").get();
-            String content = nodes.get(2).get();
             String time = nodes.get(1).xpath("div/text()").get();
             if(StringUtils.hasText(time)){
-                time = time.split("：")[1];
+                time = time.split("：")[1].split("信息来源")[0];
             }
+            StringBuffer sb = new StringBuffer();
+            for(int i=2; i<nodes.size(); i++){
+                sb.append(nodes.get(i).get());
+            }
+            String content = sb.toString();
             if(StringUtils.hasText(title)&&StringUtils.hasText(content)) {
                 //2015/7/8 21:55:53
                 //page.putField("announcement", new Announcement(title, content, band, type, time));
@@ -81,9 +85,9 @@ public class SHTZGGPageCrawler extends AbstractBaseCrawler {
     private static String getTypeFromTitle(String title){
         if(title==null){
             return null;
-        }else if(title.indexOf("托管入库的公告")>=0){
+        }else if(title.indexOf("托管结果公告")>=0 || title.indexOf("托管产品公告")>=0){
             return "1";
-        }else if(title.indexOf("【申购】")>=0){
+        }else if(title.indexOf("申购公告")>=0){
             return "2";
         }else{
             return "3";

@@ -32,7 +32,7 @@ public class JSScheduler implements BaseSchduler {
     JSGuaPaiGongGaoPageCrawler JSGuaPaiGongGaoPageCrawler;
 
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void JSGuaPaiGongGaoPageCrawler() {
         Spider spider = Spider.create(JSGuaPaiGongGaoPageCrawler).addPipeline(pipeline);
         for(String startUrl : JSGuaPaiGongGaoPageCrawler.getStartUrls()){
@@ -45,7 +45,7 @@ public class JSScheduler implements BaseSchduler {
     JSZhongQianGongGaoPageCrawler JSZhongQianGongGaoPageCrawler;
 
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void JSZhongQianGongGaoPageCrawler() {
         Spider spider = Spider.create(JSZhongQianGongGaoPageCrawler).addPipeline(pipeline);
         for(String startUrl : JSZhongQianGongGaoPageCrawler.getStartUrls()){
@@ -58,7 +58,7 @@ public class JSScheduler implements BaseSchduler {
     JSZaiGuaPaiGongGaoPageCrawler JSZaiGuaPaiGongGaoPageCrawler;
 
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void JSZaiGuaPaiGongGaoPageCrawler() {
         Spider spider = Spider.create(JSZaiGuaPaiGongGaoPageCrawler).addPipeline(pipeline);
         for(String startUrl : JSZaiGuaPaiGongGaoPageCrawler.getStartUrls()){
@@ -71,7 +71,7 @@ public class JSScheduler implements BaseSchduler {
     JSTingPaiGongGaoPageCrawler JSTingPaiGongGaoPageCrawler;
 
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void JSTingPaiGongGaoPageCrawler() {
         Spider spider = Spider.create(JSTingPaiGongGaoPageCrawler).addPipeline(pipeline);
         for(String startUrl : JSTingPaiGongGaoPageCrawler.getStartUrls()){
@@ -84,7 +84,7 @@ public class JSScheduler implements BaseSchduler {
     JSFuPaiGongGaoPageCrawler JSFuPaiGongGaoPageCrawler;
 
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void JSFuPaiGongGaoPageCrawler() {
         Spider spider = Spider.create(JSFuPaiGongGaoPageCrawler).addPipeline(pipeline);
         for(String startUrl : JSFuPaiGongGaoPageCrawler.getStartUrls()){
@@ -97,7 +97,7 @@ public class JSScheduler implements BaseSchduler {
     JSTuoGuanGongGaoPageCrawler JSTuoGuanGongGaoPageCrawler;
 
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void JSTuoGuanGongGaoPageCrawler() {
         Spider spider = Spider.create(JSTuoGuanGongGaoPageCrawler).addPipeline(pipeline);
         for(String startUrl : JSTuoGuanGongGaoPageCrawler.getStartUrls()){
@@ -111,7 +111,7 @@ public class JSScheduler implements BaseSchduler {
     JSXianHuoCaiJiJiaPageCrawler JSXianHuoCaiJiJiaPageCrawler;
 
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void JSXianHuoCaiJiJiaPageCrawler() {
         Spider spider = Spider.create(JSXianHuoCaiJiJiaPageCrawler).addPipeline(pipeline);
         for(String startUrl : JSXianHuoCaiJiJiaPageCrawler.getStartUrls()){

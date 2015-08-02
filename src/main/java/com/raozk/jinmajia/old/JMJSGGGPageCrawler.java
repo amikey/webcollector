@@ -34,7 +34,7 @@ public class JMJSGGGPageCrawler extends AbstractBaseCrawler {
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/sggp/index\\.shtml\\?\\d+").all());
+        if("1".equals(appconfig.get("crawAll"))) page.addTargetRequests(page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/sggp/index\\.shtml\\?\\d+").all());
         List<String> links = page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/gggs/sggp/\\d+/\\d+.shtml").all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {

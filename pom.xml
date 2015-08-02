@@ -89,6 +89,12 @@
             <version>0.3.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.6.6</version>
+        </dependency>
+
     </dependencies>
 
 </project>

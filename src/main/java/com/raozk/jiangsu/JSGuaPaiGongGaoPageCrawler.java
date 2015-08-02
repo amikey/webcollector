@@ -36,7 +36,7 @@ public class JSGuaPaiGongGaoPageCrawler extends AbstractBaseCrawler {
     }
 
     public void process(Page page) {//http://ybk.jscaee.com.cn/announcement/trusteeship/index_p3.html
-        page.addTargetRequests(page.getHtml().xpath("//ul[@class='page-list']/").links().all());
+        if("1".equals(appconfig.get("crawAll"))) page.addTargetRequests(page.getHtml().xpath("//ul[@class='page-list']/").links().all());
         //http://ybk.jscaee.com.cn/announcement/trusteeship/2015-06/23/0623O42015.html
         List<String> links = page.getHtml().xpath("//ul[@class='link-list']/").links().all();
         LinkedList<String> temp = new LinkedList<String>();

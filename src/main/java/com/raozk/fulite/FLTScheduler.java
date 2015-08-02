@@ -39,7 +39,7 @@ public class FLTScheduler implements BaseSchduler {
     public void run() {
     }
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void fLTSGGGPage() {
         Spider spider = Spider.create(fLTSGGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : fLTSGGGPageCrawler.getStartUrls()){
@@ -48,7 +48,7 @@ public class FLTScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void fLTTGGGPage() {
         Spider spider = Spider.create(fLTTGGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : fLTTGGGPageCrawler.getStartUrls()){
@@ -57,7 +57,7 @@ public class FLTScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void zxPage() {
         Spider spider = Spider.create(fLTZXPageCrawler).addPipeline(advisoryNewsPipeline);
         for(String startUrl : fLTZXPageCrawler.getStartUrls()){
@@ -69,7 +69,7 @@ public class FLTScheduler implements BaseSchduler {
     @Resource(type = ShangShiGongGaoPageCrawler.class)
     BaseCrawler ShangShiGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void ShangShiGongGaoPageCrawler() {
         Spider spider = Spider.create(ShangShiGongGaoPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : ShangShiGongGaoPageCrawler.getStartUrls()){
@@ -81,7 +81,7 @@ public class FLTScheduler implements BaseSchduler {
     @Resource(type = JiaoYiGongGaoPageCrawler.class)
     BaseCrawler JiaoYiGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void JiaoYiGongGaoPageCrawler() {
         Spider spider = Spider.create(JiaoYiGongGaoPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : JiaoYiGongGaoPageCrawler.getStartUrls()){
@@ -94,7 +94,7 @@ public class FLTScheduler implements BaseSchduler {
     @Resource(type = ZhongQianGongGaoPageCrawler.class)
     BaseCrawler ZhongQianGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void ZhongQianGongGaoPageCrawler() {
         Spider spider = Spider.create(ZhongQianGongGaoPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : ZhongQianGongGaoPageCrawler.getStartUrls()){
@@ -106,7 +106,7 @@ public class FLTScheduler implements BaseSchduler {
     @Resource(type = TingPaiGongGaoPageCrawler.class)
     BaseCrawler TingPaiGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void TingPaiGongGaoPageCrawler() {
         Spider spider = Spider.create(TingPaiGongGaoPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : TingPaiGongGaoPageCrawler.getStartUrls()){
@@ -119,7 +119,7 @@ public class FLTScheduler implements BaseSchduler {
     @Resource(name="fltJiaoYiShuJuPageCrawler")
     JiaoYiShuJuPageCrawler fltJiaoYiShuJuPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void JiaoYiShuJuPageCrawler() {
         Spider spider = Spider.create(fltJiaoYiShuJuPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : fltJiaoYiShuJuPageCrawler.getStartUrls()){
@@ -131,7 +131,7 @@ public class FLTScheduler implements BaseSchduler {
     @Resource(type = XianHuoCanKaoJiaPageCrawler.class)
     BaseCrawler XianHuoCanKaoJiaPageCrawler;
 
-    @Scheduled(cron = "0 40 22 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void XianHuoCanKaoJiaPageCrawler() {
         Spider spider = Spider.create(XianHuoCanKaoJiaPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : XianHuoCanKaoJiaPageCrawler.getStartUrls()){

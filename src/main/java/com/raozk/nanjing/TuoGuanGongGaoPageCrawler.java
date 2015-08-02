@@ -36,7 +36,7 @@ public class TuoGuanGongGaoPageCrawler extends AbstractBaseCrawler {
     }
 
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().xpath("//div[@class='fenye']").links().all());
+        if("1".equals(appconfig.get("crawAll"))) page.addTargetRequests(page.getHtml().xpath("//div[@class='fenye']").links().all());
         List<String> links = page.getHtml().xpath("//div[@class='ilist']/ul/li").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {

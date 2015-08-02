@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import sun.security.provider.MD5;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
@@ -42,14 +43,20 @@ public class AnnouncementPipeline implements Pipeline {
         return redisTemplate.opsForSet().add("001:00:"+exchange+":"+type,url)==1?true:false;
     }
 
+    @Transactional
     public void process(ResultItems resultItems, Task task) {
         Announcement announcement = resultItems.get("announcement");
         if(announcement!=null && addCrawed(announcement.getExchange(), announcement.getType(), resultItems.getRequest().getUrl())){
             announcement.setDomain(task.getSite().getDomain());
             announcement.setUrl(resultItems.getRequest().getUrl());
-            saveAnnoucement2Redis(announcement);
             saveAnnoucement2Mysql(announcement);
-            pubAnnoucement(announcement);
+            saveAnnoucement2Redis(announcement);
+            try{
+                pubAnnoucement(announcement);
+            }catch (Exception e){
+                logger.warn("pub error" ,e);
+            }
+
         }
     }
 
@@ -67,7 +74,7 @@ public class AnnouncementPipeline implements Pipeline {
     }
 
     private void saveAnnoucement2Mysql(Announcement announcement){
-        jdbcTemplate.update("insert into t_announcement(title, time, exchange, type, domain, url, contentMD5) values(?,?,?,?,?,?,?)",
+        jdbcTemplate.update("replace into t_announcement(title, time, exchange, type, domain, url, contentMD5) values(?,?,?,?,?,?,?)",
                 announcement.getTitle(), announcement.getTime(), announcement.getExchange(), announcement.getType(),
                 announcement.getDomain(), announcement.getUrl(), DigestUtils.md5Hex(announcement.getContent()));
     }
@@ -88,7 +95,7 @@ public class AnnouncementPipeline implements Pipeline {
         Map<String, String> pubAnnoucement = new LinkedHashMap<String, String>(2);
         pubAnnoucement.put("title", announcement.getTitle());
         pubAnnoucement.put("contentMD5", DigestUtils.md5Hex(announcement.getContent()));
-        publisher.send("ac", 0);
+        publisher.send("yb.ac", 0);
         publisher.send(JSON.toJSONString(pubAnnoucement), 0);
     }
 

@@ -1,9 +1,11 @@
-package com.raozk.shanghai;
+package com.raozk.huazhong;
 
 import com.raozk.crawler.BaseCrawler;
 import com.raozk.piprline.AdvisoryNewsPipeline;
 import com.raozk.piprline.AnnouncementPipeline;
 import com.raozk.scheduler.BaseSchduler;
+import com.raozk.shanghai.SHTZGGPageCrawler;
+import com.raozk.shanghai.SHZXPageCrawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,15 +19,9 @@ import javax.annotation.Resource;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class SHScheduler implements BaseSchduler {
+public class HZScheduler implements BaseSchduler {
 
-    private static Logger logger = LoggerFactory.getLogger(SHScheduler.class);
-
-    @Resource(type = SHTZGGPageCrawler.class)
-    BaseCrawler nFTZGGPageCrawler;
-
-    @Resource(type = SHZXPageCrawler.class)
-    BaseCrawler nFZXPageCrawler;
+    private static Logger logger = LoggerFactory.getLogger(HZScheduler.class);
 
     @Resource(type = AnnouncementPipeline.class)
     Pipeline announcementPipeline;
@@ -36,22 +32,17 @@ public class SHScheduler implements BaseSchduler {
     public void run() {
     }
 
+    @Resource(type = HZGongGaoPageCrawler.class)
+    BaseCrawler HZGongGaoPageCrawler;
+
     @Scheduled(cron = "0 0 * * * ?")
-    public void nFTZGGPage() {
-        Spider spider = Spider.create(nFTZGGPageCrawler).addPipeline(announcementPipeline);
-        for(String startUrl : nFTZGGPageCrawler.getStartUrls()){
+    public void hzGGGGPage() {
+        Spider spider = Spider.create(HZGongGaoPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : HZGongGaoPageCrawler.getStartUrls()){
             spider.addUrl(startUrl);
         }
         spider.start();
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
-    public void zxPage() {
-        Spider spider = Spider.create(nFZXPageCrawler).addPipeline(advisoryNewsPipeline);
-        for(String startUrl : nFZXPageCrawler.getStartUrls()){
-            spider.addUrl(startUrl);
-        }
-        spider.start();
-    }
 
 }

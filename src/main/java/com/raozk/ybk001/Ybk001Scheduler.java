@@ -27,7 +27,7 @@ public class Ybk001Scheduler implements BaseSchduler {
     @Resource(type = MobilePipeline.class)
     Pipeline pipeline;
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 1 * * ?")
     public void run() {
         Spider spider = Spider.create(baseCrawler).addPipeline(pipeline);
         for(String startUrl : baseCrawler.getStartUrls()){

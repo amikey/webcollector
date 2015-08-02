@@ -37,7 +37,7 @@ public class FLTTGGGPageCrawler extends AbstractBaseCrawler {
     private static Map<String, String> dateMap = new HashMap<String, String>();
 
     public void process(Page page) {//http://www.nfqbyp.com/infomation.html?pageIndex=2&newsTypeID=16793&newsType=%E4%B8%AD%E5%BF%83%E9%80%9A%E5%91%8A
-        page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
+        if("1".equals(appconfig.get("crawAll"))) page.addTargetRequests(page.getHtml().xpath("div[@class='pages']").links().all());
         LinkedList<String> temp = new LinkedList<String>();
         List<Selectable> links = page.getHtml().xpath("ul[@class='global_tx_list4']/li").nodes();
         for(Selectable link : links){
