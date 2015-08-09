@@ -42,7 +42,7 @@ public class NFScheduler implements BaseSchduler {
     public void run() {
     }
 
-    @Scheduled(cron = "0 11 * * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void nFTZGGPage() {
         Spider spider = Spider.create(nFTZGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : nFTZGGPageCrawler.getStartUrls()){
@@ -51,7 +51,7 @@ public class NFScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 11 * * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void nFSGGGPage() {
         Spider spider = Spider.create(nFSGGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : nFSGGGPageCrawler.getStartUrls()){
@@ -60,7 +60,7 @@ public class NFScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 11 * * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void nFTGGGPage() {
         Spider spider = Spider.create(nFTGGGPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : nFTGGGPageCrawler.getStartUrls()){
@@ -69,7 +69,7 @@ public class NFScheduler implements BaseSchduler {
         spider.start();
     }
 
-    @Scheduled(cron = "0 11 * * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void zxPage() {
         Spider spider = Spider.create(nFZXPageCrawler).addPipeline(advisoryNewsPipeline);
         for(String startUrl : nFZXPageCrawler.getStartUrls()){
@@ -81,7 +81,7 @@ public class NFScheduler implements BaseSchduler {
     @Resource(type = NFJiaoYiShuJUPageCrawler.class)
     BaseCrawler NFJiaoYiShuJUPageCrawler;
 
-    @Scheduled(cron = "0 11 * * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void NFJiaoYiShuJUPageCrawler() {
         Spider spider = Spider.create(NFJiaoYiShuJUPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : NFJiaoYiShuJUPageCrawler.getStartUrls()){
@@ -93,7 +93,7 @@ public class NFScheduler implements BaseSchduler {
     @Resource(type = NFTingPaiGongGaoPageCrawler.class)
     BaseCrawler NFTingPaiGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 11 * * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void NFTingPaiGongGaoPageCrawler() {
         Spider spider = Spider.create(NFTingPaiGongGaoPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : NFTingPaiGongGaoPageCrawler.getStartUrls()){
