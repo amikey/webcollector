@@ -1,4 +1,4 @@
-package com.raozk.huazhong;
+package com.raozk.nanchang;
 
 import com.raozk.crawler.BaseCrawler;
 import com.raozk.piprline.AdvisoryNewsPipeline;
@@ -19,30 +19,26 @@ import javax.annotation.Resource;
  * Created by rzk on 15-6-16.
  */
 @Component
-public class HZScheduler implements BaseSchduler {
+public class NCScheduler implements BaseSchduler {
 
-    private static Logger logger = LoggerFactory.getLogger(HZScheduler.class);
+    private static Logger logger = LoggerFactory.getLogger(NCScheduler.class);
 
     @Resource(type = AnnouncementPipeline.class)
     Pipeline announcementPipeline;
 
-    @Resource(type = AdvisoryNewsPipeline.class)
-    Pipeline advisoryNewsPipeline;
-
     public void run() {
     }
 
-    @Resource(type = HZGongGaoPageCrawler.class)
-    BaseCrawler HZGongGaoPageCrawler;
+    @Resource(type = NCGGPageCrawler.class)
+    NCGGPageCrawler NCGGPageCrawler;
 
     @Scheduled(cron = "0 0/1 * * * ?")
-    public void hzGGGGPage() {
-        Spider spider = Spider.create(HZGongGaoPageCrawler).addPipeline(announcementPipeline);
-        for(String startUrl : HZGongGaoPageCrawler.getStartUrls()){
+    public void NCGGPageCrawler() {
+        Spider spider = Spider.create(NCGGPageCrawler).addPipeline(announcementPipeline);
+        for(String startUrl : NCGGPageCrawler.getStartUrls()){
             spider.addUrl(startUrl);
         }
         spider.start();
     }
-
 
 }

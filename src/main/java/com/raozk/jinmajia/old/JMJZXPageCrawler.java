@@ -38,7 +38,7 @@ public class JMJZXPageCrawler extends AbstractBaseCrawler {
         List<String> links = page.getHtml().links().regex("http://qbyp\\.jinmajia\\.com/article/mtbd/qbyp/bszx/\\d+/\\d+.shtml").all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(band, type, link)) {
+            if (!crawed(link)) {
                 temp.addFirst(link);
         }
     }

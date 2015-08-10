@@ -26,7 +26,7 @@ public class ZNScheduler{
     @Resource(type = ZNTongZhiGongGaoPageCrawler.class)
     ZNTongZhiGongGaoPageCrawler ZNTongZhiGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void ZNTongZhiGongGaoPageCrawler() {
         Spider spider = Spider.create(ZNTongZhiGongGaoPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : ZNTongZhiGongGaoPageCrawler.getStartUrls()){
@@ -38,7 +38,7 @@ public class ZNScheduler{
     @Resource(type = ZNJiaoYiShuJuPageCrawler.class)
     ZNJiaoYiShuJuPageCrawler ZNJiaoYiShuJuPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void ZNJiaoYiShuJuPageCrawler() {
         Spider spider = Spider.create(ZNJiaoYiShuJuPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : ZNJiaoYiShuJuPageCrawler.getStartUrls()){
@@ -50,7 +50,7 @@ public class ZNScheduler{
     @Resource(type = ZNShengGouGongGaoPageCrawler.class)
     ZNShengGouGongGaoPageCrawler ZNShengGouGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void ZNShengGouGongGaoPageCrawler() {
         Spider spider = Spider.create(ZNShengGouGongGaoPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : ZNShengGouGongGaoPageCrawler.getStartUrls()){
@@ -62,7 +62,7 @@ public class ZNScheduler{
     @Resource(type = ZNTuoGuanGongGaoPageCrawler.class)
     ZNTuoGuanGongGaoPageCrawler ZNTuoGuanGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void ZNTuoGuanGongGaoPageCrawler() {
         Spider spider = Spider.create(ZNTuoGuanGongGaoPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : ZNTuoGuanGongGaoPageCrawler.getStartUrls()){
@@ -75,7 +75,7 @@ public class ZNScheduler{
     @Resource(type = ZNXianHuoCanKaoJiaPageCrawler.class)
     ZNXianHuoCanKaoJiaPageCrawler ZNXianHuoCanKaoJiaPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void ZNXianHuoCanKaoJiaPageCrawler() {
         Spider spider = Spider.create(ZNXianHuoCanKaoJiaPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : ZNXianHuoCanKaoJiaPageCrawler.getStartUrls()){

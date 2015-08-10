@@ -31,7 +31,7 @@ public class HXScheduler implements BaseSchduler {
     @Resource(type = HXGongGaoPageCrawler.class)
     HXGongGaoPageCrawler HXGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void HXGongGaoPageCrawler() {
         Spider spider = Spider.create(HXGongGaoPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : HXGongGaoPageCrawler.getStartUrls()){
@@ -43,7 +43,7 @@ public class HXScheduler implements BaseSchduler {
     @Resource(type = HXTuoGuanGongGaoPageCrawler.class)
     HXTuoGuanGongGaoPageCrawler HXTuoGuanGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void HXTuoGuanGongGaoPageCrawler() {
         Spider spider = Spider.create(HXTuoGuanGongGaoPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : HXTuoGuanGongGaoPageCrawler.getStartUrls()){
@@ -55,7 +55,7 @@ public class HXScheduler implements BaseSchduler {
     @Resource(type = HXShenGouGongGaoPageCrawler.class)
     HXShenGouGongGaoPageCrawler HXShenGouGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void HXShenGouGongGaoPageCrawler() {
         Spider spider = Spider.create(HXShenGouGongGaoPageCrawler).addPipeline(announcementPipeline);
         for(String startUrl : HXShenGouGongGaoPageCrawler.getStartUrls()){

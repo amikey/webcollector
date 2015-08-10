@@ -25,7 +25,7 @@ public class JMJScheduler {
     @Resource(type = JMJRuKuGongGaoPageCrawler.class)
     JMJRuKuGongGaoPageCrawler JMJRuKuGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void JMJRuKuGongGaoPageCrawler() {
         Spider spider = Spider.create(JMJRuKuGongGaoPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : JMJRuKuGongGaoPageCrawler.getStartUrls()){
@@ -37,7 +37,7 @@ public class JMJScheduler {
     @Resource(type = JMJShengGouGongGaoPageCrawler.class)
     JMJShengGouGongGaoPageCrawler JMJShengGouGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void JMJShengGouGongGaoPageCrawler() {
         Spider spider = Spider.create(JMJShengGouGongGaoPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : JMJShengGouGongGaoPageCrawler.getStartUrls()){
@@ -49,7 +49,7 @@ public class JMJScheduler {
     @Resource(type = JMJPingTaiTongZhiPageCrawler.class)
     JMJPingTaiTongZhiPageCrawler JMJPingTaiTongZhiPageCrawler;
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void JMJPingTaiTongZhiPageCrawler() {
         Spider spider = Spider.create(JMJPingTaiTongZhiPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : JMJPingTaiTongZhiPageCrawler.getStartUrls()){

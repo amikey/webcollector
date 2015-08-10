@@ -44,9 +44,9 @@ public class NFZXPageCrawler extends AbstractBaseCrawler {
         List<String> links = page.getHtml().xpath("ul[@class='list_news']").links().all();
         LinkedList<String> temp = new LinkedList<String>();
         for(String link : links) {
-            if (!crawed(band, type, link)) {
+            if (!crawed(link)) {
                 temp.addFirst(link);
-           }
+            }
         }
         page.addTargetRequests(temp);
         String title = page.getHtml().xpath("//div[@class='dnews_title']/text()").get();

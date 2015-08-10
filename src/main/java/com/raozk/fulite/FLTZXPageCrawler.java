@@ -45,7 +45,7 @@ public class FLTZXPageCrawler extends AbstractBaseCrawler {
         List<Selectable> links = page.getHtml().xpath("ul[@class='global_tx_list4']/li").nodes();
         for(Selectable link : links){
             String linkUrl = link.links().all().get(0);
-            if (!crawed(band, type, linkUrl)) {
+            if (!crawed(linkUrl)) {
                 temp.addFirst(linkUrl);
             }
             String date = link.xpath("span[@class='box_r']/text()").get();

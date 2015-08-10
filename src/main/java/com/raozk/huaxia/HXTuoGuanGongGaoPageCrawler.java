@@ -37,6 +37,11 @@ public class HXTuoGuanGongGaoPageCrawler extends AbstractBaseCrawler {
     }
 
     public void process(Page page) {//http://www.nfqbyp.com/infomation.html?pageIndex=2&newsTypeID=16793&newsType=%E4%B8%AD%E5%BF%83%E9%80%9A%E5%91%8A
+        String html = page.getHtml().get();
+        if(html.indexOf("JumpSelf")>0 && html.indexOf("self.location=\"")>0 && html.length()<500){
+            html = html.split("self.location=\"/notice/tggg/")[1].split("\"")[0];
+            page.addTargetRequest("http://www.huaxiacae.com/notice/tggg/" + html);
+        }
         if("1".equals(appconfig.get("crawAll"))) page.addTargetRequests(page.getHtml().xpath("table[@class='list_page']").links().all());
         List<String> links = page.getHtml().xpath("table[@class='box']/tbody/tr/td/ul/").links().all();
         LinkedList<String> temp = new LinkedList<String>();
