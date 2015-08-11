@@ -42,7 +42,7 @@ public class NCGGPageCrawler extends AbstractBaseCrawler {
             startUrls.add("http://ybk.nccaee.com/web/news/news.jsp?parentid=44&classid=44&pageIndex=5");
             startUrls.add("http://ybk.nccaee.com/web/news/news.jsp?parentid=44&classid=44&pageIndex=6");
             startUrls.add("http://ybk.nccaee.com/web/news/news.jsp?parentid=44&classid=44&pageIndex=7");
-        }
+       }
     }
 
     public void process(Page page) {
@@ -61,7 +61,11 @@ public class NCGGPageCrawler extends AbstractBaseCrawler {
         List<Selectable> nodes = page.getHtml().xpath("div[@class='st1_r_bor']/table/tbody/").nodes();
         if(nodes!=null && nodes.size()==3){
             String title = nodes.get(0).xpath("tr/td/span/text()").get();
-            String content = nodes.get(2).xpath("tr/td/").get();
+            String content = "";
+            List<String> contents = nodes.get(2).xpath("tr/td/").all();
+            for(String tempContent : contents){
+                content = content + tempContent;
+            }
             String time = nodes.get(1).xpath("tr/td/text()").get();
             if(StringUtils.hasText(title)&&StringUtils.hasText(content)) {
                 //2015/7/8 21:55:53

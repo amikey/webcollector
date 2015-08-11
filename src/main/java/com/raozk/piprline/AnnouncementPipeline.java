@@ -22,6 +22,8 @@ import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Context;
 import org.zeromq.ZMQ.Socket;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -92,11 +94,23 @@ public class AnnouncementPipeline implements Pipeline {
     }
 
     synchronized private void pubAnnoucement(Announcement announcement){
+        if(!needPub(announcement.getTime(), new Date())){
+            return;
+        }
         Map<String, String> pubAnnoucement = new LinkedHashMap<String, String>(2);
         pubAnnoucement.put("title", announcement.getTitle());
         pubAnnoucement.put("contentMD5", DigestUtils.md5Hex(announcement.getContent()));
         publisher.send("yb.ac", 0);
         publisher.send(JSON.toJSONString(pubAnnoucement), 0);
+    }
+
+    public boolean needPub(Date day1, Date day2) {
+        int days = (int)((day1.getTime() - day2.getTime())/86400000);
+        if(days<0){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     @PreDestroy
