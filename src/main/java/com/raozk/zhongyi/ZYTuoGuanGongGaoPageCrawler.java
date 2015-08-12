@@ -36,7 +36,6 @@ public class ZYTuoGuanGongGaoPageCrawler extends AbstractBaseCrawler {
     private static Map<String, String> titleMap = new HashMap<String, String>();
     private static Map<String, String> dateMap = new HashMap<String, String>();
     public void process(Page page) {
-        if("1".equals(appconfig.get("crawAll"))) page.addTargetRequests(page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='page']").links().all());
         List<Selectable> links = page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='list']/table/tbody/").nodes();
         LinkedList<String> temp = new LinkedList<String>();
         for(Selectable selectable : links) {
@@ -50,10 +49,9 @@ public class ZYTuoGuanGongGaoPageCrawler extends AbstractBaseCrawler {
             String time = urlLine.get(2).xpath("td/text()").get();
             titleMap.put(url, title);
             dateMap.put(url, time);
-            temp.add(url);
-           /* if (!crawed(band, type, link)) {
-                temp.addFirst(link);
-            }*/
+            if (!crawed(band, type, url)) {
+                temp.addFirst(url);
+            }
         }
         page.addTargetRequests(temp);
 

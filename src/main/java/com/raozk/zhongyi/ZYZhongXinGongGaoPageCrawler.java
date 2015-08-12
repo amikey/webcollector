@@ -10,6 +10,7 @@ import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.selector.Selectable;
 
+import javax.annotation.PostConstruct;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -29,15 +30,24 @@ public class ZYZhongXinGongGaoPageCrawler extends AbstractBaseCrawler {
     private static String band = "05";
     private static String type = "3";
 
-    static {
+    @PostConstruct
+    public void init(){
         startUrls.add("http://www.cacecybk.com.cn/web/news/news.jsp?parentid=44&classid=59");
         startUrls.add("http://www.cacecybk.com.cn/web/news/news.jsp?parentid=44&classid=109");
+        if("1".equals(appconfig.get("crawAll"))){
+            startUrls.add("http://www.cacecybk.com.cn/web/news/news.jsp?parentid=44&classid=59&pageIndex=2");
+            startUrls.add("http://www.cacecybk.com.cn/web/news/news.jsp?parentid=44&classid=59&pageIndex=3");
+            startUrls.add("http://www.cacecybk.com.cn/web/news/news.jsp?parentid=44&classid=59&pageIndex=4");
+            startUrls.add("http://www.cacecybk.com.cn/web/news/news.jsp?parentid=44&classid=59&pageIndex=5");
+            startUrls.add("http://www.cacecybk.com.cn/web/news/news.jsp?parentid=44&classid=59&pageIndex=6");
+            startUrls.add("http://www.cacecybk.com.cn/web/news/news.jsp?parentid=44&classid=59&pageIndex=7");
+
+        }
     }
 
     private static Map<String, String> titleMap = new HashMap<String, String>();
     private static Map<String, String> dateMap = new HashMap<String, String>();
     public void process(Page page) {
-        if("1".equals(appconfig.get("crawAll"))) page.addTargetRequests(page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='page']").links().all());
         List<Selectable> links = page.getHtml().xpath("//div[@class='st_rightbor']/div[@class='list']/table/tbody/").nodes();
         LinkedList<String> temp = new LinkedList<String>();
         for(Selectable selectable : links) {
@@ -51,10 +61,9 @@ public class ZYZhongXinGongGaoPageCrawler extends AbstractBaseCrawler {
             String time = urlLine.get(2).xpath("td/text()").get();
             titleMap.put(url, title);
             dateMap.put(url, time);
-            temp.add(url);
-           /* if (!crawed(band, type, link)) {
-                temp.addFirst(link);
-            }*/
+            if (!crawed(band, type, url)) {
+                temp.addFirst(url);
+            }
         }
         page.addTargetRequests(temp);
 
