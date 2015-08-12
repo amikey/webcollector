@@ -23,7 +23,7 @@ public class ZYScheduler {
     @Resource(type = ZYZhongXinGongGaoPageCrawler.class)
     ZYZhongXinGongGaoPageCrawler ZYZhongXinGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 59 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void ZYZhongXinGongGaoPageCrawler() {
         Spider spider = Spider.create(ZYZhongXinGongGaoPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : ZYZhongXinGongGaoPageCrawler.getStartUrls()){
@@ -35,7 +35,7 @@ public class ZYScheduler {
     @Resource(type = ZYTuoGuanGongGaoPageCrawler.class)
     ZYTuoGuanGongGaoPageCrawler ZYTuoGuanGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 59 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void ZYTuoGuanGongGaoPageCrawler() {
         Spider spider = Spider.create(ZYTuoGuanGongGaoPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : ZYTuoGuanGongGaoPageCrawler.getStartUrls()){
@@ -48,7 +48,7 @@ public class ZYScheduler {
     @Resource(type = ZYShengGouGongGaoPageCrawler.class)
     ZYShengGouGongGaoPageCrawler ZYShengGouGongGaoPageCrawler;
 
-    @Scheduled(cron = "0 59 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void ZYShengGouGongGaoPageCrawler() {
         Spider spider = Spider.create(ZYShengGouGongGaoPageCrawler).addPipeline(AnnouncementPipeline);
         for(String startUrl : ZYShengGouGongGaoPageCrawler.getStartUrls()){
